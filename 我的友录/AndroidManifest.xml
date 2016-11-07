@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tarena.fgr.youlu"
+    android:versionCode="1"
+    android:versionName="达内学习1.0版" >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="17" />
+    <!-- 读联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 写联系人权限 -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <!-- 读通话记录权限 -->
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <!-- 写通话记录权限 -->
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <!-- 打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 读短信权限 -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <!-- 写短信权限 -->
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <!-- 订阅短信广播的权限,截获短信 -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!-- 发送短信权限 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- 拦截短信权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!-- 拦截电话权限 -->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <!-- 读取电话状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
+
+        <!-- 配置单元测试引用的包 -->
+        <uses-library android:name="android.test.runner" />
+
+        <!-- 主页面 -->
+        <activity
+            android:name="com.tarena.fgr.youlu.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <!-- 引导页面 -->
+        <activity
+            android:name="com.tarena.fgr.youlu.GuideActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <!-- 闪屏页面 -->
+        <activity
+            android:name="com.tarena.fgr.youlu.SplashActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 聊天页面 -->
+        <activity
+            android:name="com.tarena.fgr.youlu.ChatActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <service android:name="com.tarena.fgr.service.BlackNumberService" >
+        </service>
+    </application>
+
+    <!-- 单元测试要用到 -->
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.tarena.fgr.youlu" >
+    </instrumentation>
+
+</manifest>

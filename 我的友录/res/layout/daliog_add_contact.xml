@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/dialog_header" >
+
+        <ImageButton
+            android:id="@+id/imageButton_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:background="@null"
+            android:contentDescription="@string/add"
+            android:src="@drawable/ic_selected" />
+
+        <ImageButton
+            android:id="@+id/imageButton_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:contentDescription="@string/add_close"
+            android:src="@drawable/ic_close" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="8dp"
+            android:text="@string/add_contact"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:background="@drawable/gray_bg"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/edit_dialogadd_name"
+            style="@style/myEditText01"
+            android:hint="@string/contact_name_hint" />
+
+        <EditText
+            android:id="@+id/edit_dialogadd_phone"
+            style="@style/myEditText01"
+            android:hint="@string/contact_phone_hint"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/edit_dialogadd_email"
+            style="@style/myEditText01"
+            android:hint="@string/contact_email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/edit_dialogadd_address"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/contact_address" />
+    </LinearLayout>
+
+</LinearLayout>
