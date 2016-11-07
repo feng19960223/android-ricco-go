@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView_city_pingying"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#F0F0F0"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:text="A"
+        android:textColor="#A1A1A1"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView_city_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:text="鞍山"
+        android:textSize="20sp" />
+
+</LinearLayout>

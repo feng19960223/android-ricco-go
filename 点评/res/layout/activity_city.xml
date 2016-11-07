@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res/com.tarena.groupon"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CityActivity" >
+
+    <include layout="@layout/include_city_title" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/listView_city"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF" >
+        </ListView>
+
+        <com.tarena.view.MyLetterView
+            android:id="@+id/myLetterView_letters"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            app:letter_color="#FFFF6633" />
+    </FrameLayout>
+
+</LinearLayout>

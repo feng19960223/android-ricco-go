@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="音乐名称音乐名称音乐名称音乐名称音乐名称"
+        android:textColor="#ffffff"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView_singer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="24dp"
+        android:singleLine="true"
+        android:text="演唱者"
+        android:textColor="#ffffff"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/imageView_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageview_pause"
+        android:layout_alignRight="@+id/textView_singer"
+        android:src="@drawable/selector_next" />
+
+    <ImageView
+        android:id="@+id/imageView_pre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView_play"
+        android:layout_alignLeft="@+id/textView_name"
+        android:src="@drawable/selector_pre" />
+
+    <ImageView
+        android:id="@+id/imageView_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_name"
+        android:layout_marginStart="50dp"
+        android:layout_toRightOf="@+id/imageView_pre"
+        android:src="@drawable/selector_play" />
+
+    <ImageView
+        android:id="@+id/imageview_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView_play"
+        android:layout_marginEnd="50dp"
+        android:layout_toLeftOf="@+id/imageView_next"
+        android:src="@drawable/selector_pause" />
+
+</RelativeLayout>

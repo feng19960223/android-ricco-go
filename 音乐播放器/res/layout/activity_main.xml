@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/title_bar"
+        android:gravity="center"
+        android:text="音乐馆"
+        android:textColor="#ffffff"
+        android:textSize="24sp" />
+
+    <ListView
+        android:id="@+id/listView_musics"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#00000000"
+        android:divider="#CCFF6347"
+        android:dividerHeight="1dp"
+        android:listSelector="#CCFF6347" >
+    </ListView>
+    <!-- cacheColorHint设置8个0,有效防止滑动是没有背景图片 -->
+    <!-- divider 设置为null,List没有分割的横线 -->
+    <!-- listSelector点击List时的颜色,这里设置透明度为0,所以没有颜色 -->
+    <!-- scrollbars设置为none,没有滚动条 -->
+
+</LinearLayout>

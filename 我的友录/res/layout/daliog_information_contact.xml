@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="32dp" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:background="@drawable/dialog_header" >
+
+            <ImageButton
+                android:id="@+id/imageButton_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:contentDescription="@string/edit_close"
+                android:paddingRight="8dp"
+                android:src="@drawable/ic_close" />
+
+            <ImageButton
+                android:id="@+id/imageButton_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:contentDescription="@string/edit"
+                android:paddingStart="8dp"
+                android:src="@drawable/ic_edit" />
+
+            <TextView
+                android:id="@+id/contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:text="@string/contact_name"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="256dp"
+            android:background="@drawable/gray_bg"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/line" >
+
+                <TextView
+                    android:id="@+id/contact_phone"
+                    style="@style/daliogTextView01"
+                    android:text="@string/test_phone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/contact_phone" />
+
+                <ImageButton
+                    android:id="@+id/send_or_call"
+                    style="@style/myImageButton01"
+                    android:contentDescription="@string/unrealized"
+                    android:src="@drawable/ic_more" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/line" >
+
+                <TextView
+                    android:id="@+id/contact_email"
+                    style="@style/daliogTextView01"
+                    android:text="@string/test_email" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/contact_email" />
+
+                <ImageButton
+                    android:id="@+id/send_email"
+                    style="@style/myImageButton01"
+                    android:contentDescription="@string/unrealized"
+                    android:src="@drawable/ic_more" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/line" >
+
+                <TextView
+                    android:id="@+id/contact_address"
+                    style="@style/daliogTextView01"
+                    android:text="@string/test_address" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/contact_address" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
+
+                <TextView
+                    style="@style/daliogTextView01"
+                    android:layout_centerVertical="true"
+                    android:text="@string/add_blacklist"
+                    android:textColor="#ff0000" />
+
+                <ImageButton
+                    android:id="@+id/add_blackphone"
+                    style="@style/myImageButton01"
+                    android:contentDescription="@string/unrealized"
+                    android:src="@drawable/ic_expand" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView_contact_photo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/contact_photo"
+        android:src="@drawable/ic_contact_selected" />
+
+</RelativeLayout>

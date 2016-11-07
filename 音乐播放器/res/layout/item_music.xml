@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="#99D4D4C8"
+    android:orientation="horizontal"
+    android:padding="4dp" >
+
+    <com.tarena.fgr.view.XCRoundImageView
+        android:id="@+id/xCRoundImageView1"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/default_record_album" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="4dp"
+        android:layout_weight="1"
+        android:padding="4dp" >
+
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxEms="6"
+            android:singleLine="true"
+            android:textColor="#99ffffff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ellipsize="end"
+            android:maxEms="5"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/textView_composer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="88dp"
+            android:ellipsize="end"
+            android:maxEms="5"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/textView_durationtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#99000000" />
+
+        <TextView
+            android:id="@+id/textView_singer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="24dp"
+            android:ellipsize="end"
+            android:maxEms="5"
+            android:singleLine="true"
+            android:textColor="#99000000"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</LinearLayout>

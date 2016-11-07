@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">友录</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="calllog">通话记录</string>
+    <string name="contact">联系人</string>
+    <string name="sms">短信</string>
+    <string name="dialpad">拨号</string>
+    <string name="version">版本:</string>
+    <string name="title">标题文本</string>
+    <string name="right">右</string>
+    <string name="left">左</string>
+    <string name="bg">背景图片</string>
+    <string name="guide_str01">新手导航页面01</string>
+    <string name="guide_str02">新手导航页面02</string>
+    <string name="guide_str03">新手导航页面03</string>
+    <string name="guide_go">开始体验</string>
+    <string name="contact_photo">联系人图片</string>
+    <string name="contact_name">联系人姓名</string>
+    <string name="edit_close">取消编辑</string>
+    <string name="edit">编辑</string>
+    <string name="test_phone">177 7777 7777</string>
+    <string name="contact_phone">电话号码</string>
+    <string name="unrealized">布局图,未实现功能</string>
+    <string name="test_email">12345678@qq.com</string>
+    <string name="contact_email">电子邮箱</string>
+    <string name="test_address">中国北京朝阳区</string>
+    <string name="contact_address">通讯地址</string>
+    <string name="add_blacklist">添加到黑名单</string>
+    <string name="unrealized_function">未实现功能</string>
+    <string name="add">添加</string>
+    <string name="add_close">取消添加</string>
+    <string name="add_contact">添加联系人</string>
+    <string name="contact_name_hint">联系人姓名(必填)</string>
+    <string name="contact_phone_hint">电话号码(必填)</string>
+    <string name="un_contact">未知联系人</string>
+    <string name="test_date">2016_10_09</string>
+    <string name="calllog_type">通话类型</string>
+    <string name="dialpad_plus">拨号键盘</string>
+    <string name="test_body">qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm</string>
+    <string name="read">是否已经阅读</string>
+    <string name="plus">加号</string>
+    <string name="send_sms">发送</string>
+
+</resources>

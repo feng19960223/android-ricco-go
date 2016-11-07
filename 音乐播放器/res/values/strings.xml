@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">我音乐吧</string>
+    <string name="action_settings">Settings</string>
+    <string name="splash">闪屏</string>
+    <string name="version">版本</string>
+    <string name="guide">引导界面</string>
+    <string name="entry">开始体验</string>
+    <string name="splash_animation">闪屏动画</string>
+
+</resources>

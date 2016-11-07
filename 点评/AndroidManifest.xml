@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tarena.groupon"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="com.tarena.app.MyApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        <activity
+            android:name="com.tarena.ui.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.tarena.ui.SplashActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tarena.ui.GuideActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.tarena.ui.CityActivity"
+            android:label="@string/title_activity_city" >
+        </activity>
+        <activity
+            android:name="com.tarena.ui.SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name="com.tarena.ui.BusinessActivity"
+            android:label="@string/title_activity_cate" >
+        </activity>
+    </application>
+
+</manifest>

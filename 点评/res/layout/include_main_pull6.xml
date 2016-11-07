@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F0F0F0"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="精彩推荐"
+        android:textColor="#666666"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/my_default" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:text="请你看一场免单电影"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:text="50元抵用劵回帖申领中"
+            android:textColor="#666666" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF" >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/my_default" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@+id/imageView2"
+            android:text="盘点走心的匠人料理"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView3"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/imageView2"
+            android:text="比韩剧感人,比胡歌更暖心"
+            android:textColor="#666666" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF" >
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/my_default" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@+id/imageView3"
+            android:text="抢!暖萌兔耳保温杯"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/imageView3"
+            android:text="开扒吃货圣地回帖送"
+            android:textColor="#666666" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="猜你喜欢"
+        android:textColor="#666666"
+        android:textSize="20sp" />
+
+</LinearLayout>

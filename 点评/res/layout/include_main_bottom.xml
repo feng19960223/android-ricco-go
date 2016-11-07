@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <RadioGroup
+        android:id="@+id/radioGroup_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/radio_home"
+            style="@style/MainRadio"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_radio_home"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/radio_tuan"
+            style="@style/MainRadio"
+            android:drawableTop="@drawable/selector_radio_tuan"
+            android:text="闪惠团购" />
+
+        <RadioButton
+            android:id="@+id/radio_search"
+            style="@style/MainRadio"
+            android:drawableTop="@drawable/selector_radio_search"
+            android:text="发现" />
+
+        <RadioButton
+            android:id="@+id/radio_my"
+            style="@style/MainRadio"
+            android:drawableTop="@drawable/selector_radio_my"
+            android:text="我的" />
+    </RadioGroup>
+
+</LinearLayout>

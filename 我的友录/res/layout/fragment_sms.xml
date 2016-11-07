@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gray_bg"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/include_actionbar"
+        layout="@layout/include_actionbar" />
+
+    <ListView
+        android:id="@+id/listView_sms"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:listSelector="#88CCFFFF" />
+
+</LinearLayout>

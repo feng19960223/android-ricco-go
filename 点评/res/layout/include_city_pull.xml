@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="北京"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="GPS定位"
+            android:textColor="#A1A1A1"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="历史访问城市"
+        android:textColor="#A1A1A1"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="北京" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="济南" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="上海"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="济南" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="北京" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="上海" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="周边热门城市"
+        android:textColor="#A1A1A1"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="济南" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="天津" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="保定" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="廊坊" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="忻州" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="张家口" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="国内热门城市"
+        android:textColor="#A1A1A1"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="成都" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="重庆" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="广州" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="杭州" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="南京" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="上海" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="海外热门城市"
+        android:textColor="#A1A1A1"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="香港" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="澳门" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="台湾" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="日本" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="泰国" />
+
+        <TextView
+            style="@style/CityTextView"
+            android:text="全部海外"
+            android:textColor="#FF6633" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:paddingEnd="8dp"
+    android:paddingStart="8dp" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/my_default" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/deal_list_item_status_reservation" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/imageView1"
+        android:singleLine="true"
+        android:text="Le Camelia法式浪漫拿破仑"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_toRightOf="@+id/imageView1"
+        android:maxLines="2"
+        android:text="仅售138元,价值238元法式浪漫拿破仑1个!2店通用!月星环球港新店开业!法式甜品经典,三十多层香脆起酥皮,融合清新奶油,口感层次丰富,幸福甜蜜妙不可言!"
+        android:textColor="#898989" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView1"
+        android:text="&lt;100m"
+        android:textColor="#898989" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:text="￥188"
+        android:textColor="#FF8400"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView4"
+        android:text="已售2394"
+        android:textColor="#898989" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/textView4"
+        android:src="@drawable/search_ad_icon_rest" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_toRightOf="@+id/imageView3"
+        android:background="@drawable/shape_textview_pull4_4"
+        android:maxEms="13"
+        android:singleLine="true"
+        android:text="新客最高减15元"
+        android:textColor="#FF8400" />
+
+</RelativeLayout>

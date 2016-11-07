@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="#FFFFFF" >
+
+    <ImageView
+        android:id="@+id/imageView_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_back_u" />
+
+    <EditText
+        android:id="@+id/editText1_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toRightOf="@+id/imageView_back"
+        android:background="@drawable/shape_edittext_search"
+        android:drawableLeft="@drawable/icon_search"
+        android:drawablePadding="4dp"
+        android:hint="城市名,拼音,首字母..."
+        android:singleLine="true" />
+
+</RelativeLayout>
