@@ -35,8 +35,8 @@ import com.tarena.groupon.R;
  * 
  */
 public class HttpUtil {
-	private static final String APPKEY = "请到大众点评申请";
-	private static final String APP_SECRET = "请到大众点评申请";
+	private static final String APPKEY = "49814079";
+	private static final String APP_SECRET = "90e3438a41d646848033b6b9d461ed54";
 
 	// Volley请求队列
 	private static RequestQueue queue = Volley.newRequestQueue(MyApp.context);
@@ -61,6 +61,18 @@ public class HttpUtil {
 					return lruCache.get(arg0);
 				}
 			});
+
+	/**
+	 * 获得评论
+	 * 
+	 * @param url
+	 *            评论地址
+	 * @param listener
+	 */
+	public static void getComments(String url, Listener<String> listener) {
+		StringRequest request = new StringRequest(url, listener, null);
+		queue.add(request);
+	}
 
 	/**
 	 * 通过Volley的ImageLoader在指定的ImageView中显示网络图片

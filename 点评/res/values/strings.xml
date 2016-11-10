@@ -9,5 +9,7 @@
     <string name="title_activity_city">CityActivity</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_cate">CateActivity</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_find">FindActivity</string>
 
 </resources>

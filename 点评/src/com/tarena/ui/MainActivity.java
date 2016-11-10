@@ -12,7 +12,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.android.volley.Response.Listener;
@@ -37,12 +36,9 @@ import com.tarena.utils.HttpUtil;
 
 public class MainActivity extends FragmentActivity {
 	private TextView textView_place = null;// 城市
-	private TextView textView_search = null;// 头部中,输入商户名,地名
 	private ImageView imageView_menu = null;// 显示菜单
 	private LinearLayout linearLayout_menu = null;// 菜单显示于隐藏
 	private PullToRefreshListView pullToRefreshListView = null;// 主要下拉刷新
-	private RadioGroup radioGroup_bottom = null;
-
 	private ListView listview = null;// 下拉刷新添加头信息
 	private DealsAdapter adapter = null;
 
@@ -75,7 +71,16 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void initBottom() {
-		radioGroup_bottom = (RadioGroup) findViewById(R.id.radioGroup_bottom);
+		RadioButton radio_search = (RadioButton) findViewById(R.id.radio_search);
+		radio_search.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						FindActivity.class);
+				intent.putExtra("from", "main");
+				startActivity(intent);
+			}
+		});
 	}
 
 	View view7;
@@ -242,7 +247,6 @@ public class MainActivity extends FragmentActivity {
 
 	private void initTitle() {
 		textView_place = (TextView) findViewById(R.id.textView_place);
-		textView_search = (TextView) findViewById(R.id.textView_search);
 		imageView_menu = (ImageView) findViewById(R.id.imageView_menu);
 		linearLayout_menu = (LinearLayout) findViewById(R.id.include_main_menu);
 		imageView_menu.setOnClickListener(new OnClickListener() {
@@ -275,13 +279,6 @@ public class MainActivity extends FragmentActivity {
 			textView_place.setText(cityName);
 			refresh();
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.tarena.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class Business {
@@ -8,7 +9,11 @@ public class Business {
 	private int count;// 所有页面商户总数，最多为40条
 	private List<Businesses> businesses;
 
-	public static class Businesses {
+	public static class Businesses implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private int business_id;// 商户ID
 		private String name;// 商户名
 		private String branch_name;// 分店名
@@ -44,7 +49,11 @@ public class Business {
 		private int deal_count;// 商户当前在线团购数量
 		private List<Deals> deals;
 
-		public static class Deals {// 团购列表
+		public static class Deals implements Serializable {// 团购列表
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			private String id;// 团购ID
 			private String description;// 团购描述
 			private String url;// 团购页面链接

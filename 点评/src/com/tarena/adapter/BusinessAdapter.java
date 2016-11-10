@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
+import com.tarena.app.MyApp;
 import com.tarena.entity.Business.Businesses;
 import com.tarena.groupon.R;
 import com.tarena.utils.HttpUtil;
@@ -64,7 +67,19 @@ public class BusinessAdapter extends MyBaseAdapter<Businesses> {
 		vh.textView3.setText(sb.deleteCharAt(sb.length() - 1).toString());// 地点
 		vh.textView4.setText(businesses.getCategories().get(0)); // 餐厅类型
 		// TODO
-		vh.textView5.setText((new Random().nextInt(900) + 100) + "米");
+		if (MyApp.lastpoint != null) {
+			// 商户经纬度,来自大众点评
+			double lat1 = businesses.getLatitude();
+			double lng1 = businesses.getLongitude();
+			// vh.textView5.setText(""+ DistanceUtil.getDistance(lat1, lng1,
+			// lat2, lng2) + "米");
+			// 商户来自大众点评,用户百度地图,所以有误差
+			double d = Math.round(DistanceUtil.getDistance(new LatLng(lat1,
+					lng1), MyApp.lastpoint) * 10000) / 10000;// 四舍五入
+			vh.textView5.setText("" + d + "米");
+		} else {
+			vh.textView5.setText("未定位");
+		}
 		return convertView;
 	}
 

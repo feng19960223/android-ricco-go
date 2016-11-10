@@ -5,9 +5,9 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -140,6 +140,24 @@ public class BusinessActivity extends Activity {
 				}
 				// 关闭frameLayou
 				frameLayout.setVisibility(View.GONE);
+			}
+		});
+		listView_cate.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Businesses business = null;
+				if (spUtil.isCloseBanner()) {// 没有广告
+					business = adapter.getItem(position);
+				} else {// 有广告
+					business = adapter.getItem(position - 1);
+				}
+				Intent intent = new Intent(BusinessActivity.this,
+						DetailActivity.class);
+				// Businesses类和其内部类要实现Serializable接口
+				intent.putExtra("business", business);
+				startActivity(intent);
 			}
 		});
 	}
