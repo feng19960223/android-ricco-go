@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+    <EditText
+        android:id="@+id/et_main_username"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:hint="请输入用户名..." />
+
+    <EditText
+        android:id="@+id/et_main_password"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:hint="请输入密码..."
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btn_main_login"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn_blue_selector"
+        android:text="登录" />
+
+    <Button
+        android:id="@+id/btn_main_regist"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn_blue_selector"
+        android:onClick="regist"
+        android:text="注册" />
+
+</LinearLayout>

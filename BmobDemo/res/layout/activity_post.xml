@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/header_post_layout" />
+
+    <EditText
+        android:id="@+id/et_post_title"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_margin="15dp"
+        android:hint="帖子标题..."
+        android:maxLines="2"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_post_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="这一刻的想法..."
+        android:lines="6"
+        android:maxLines="6"
+        android:padding="8dp"
+        android:textSize="14sp" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_post_post"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/btn_blue_selector"
+        android:text="发 帖"
+        android:textColor="#ffffffff"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_post_update"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/btn_blue_selector"
+        android:text="更 新"
+        android:textColor="#ffffffff"
+        android:textSize="20sp" />
+
+</LinearLayout>
