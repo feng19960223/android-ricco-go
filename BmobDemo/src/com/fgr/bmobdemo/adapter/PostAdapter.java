@@ -118,12 +118,15 @@ public class PostAdapter extends BaseAdapter {
 		// 更新和删除
 		// 如果第position个位置上帖子的作者是当前登录用户
 		// "更新"与"删除"才可见
-		if (user.getUsername().equals(currentUser.getUsername())) {
-			vh.tvDelete.setVisibility(View.VISIBLE);
-			vh.tvUpdate.setVisibility(View.VISIBLE);
-		} else {
-			vh.tvDelete.setVisibility(View.INVISIBLE);
-			vh.tvUpdate.setVisibility(View.INVISIBLE);
+		// null....
+		if (user.getUsername() != null && currentUser.getUsername() != null) {
+			if (user.getUsername().equals(currentUser.getUsername())) {
+				vh.tvDelete.setVisibility(View.VISIBLE);
+				vh.tvUpdate.setVisibility(View.VISIBLE);
+			} else {
+				vh.tvDelete.setVisibility(View.INVISIBLE);
+				vh.tvUpdate.setVisibility(View.INVISIBLE);
+			}
 		}
 
 		// 点击“删除”，将第position位置上的帖子删除掉
@@ -194,7 +197,6 @@ public class PostAdapter extends BaseAdapter {
 				intent.putExtra("from", "update");
 				intent.putExtra("post", post);
 				context.startActivity(intent);
-
 			}
 		});
 

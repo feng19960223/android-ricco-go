@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
@@ -27,8 +24,10 @@ import com.fgr.bmobdemo.adapter.PostAdapter;
 import com.fgr.bmobdemo.app.MyApp;
 import com.fgr.bmobdemo.bean.MyPost;
 import com.fgr.bmobdemo.bean.MyUser;
+import com.fgr.bmobdemo.receiver.MyPushMessageReceiver;
+import com.fgr.bmobdemo.receiver.MyPushMessageReceiver.EventListener;
 
-public class ShowActivity extends Activity {
+public class ShowActivity extends Activity implements EventListener {
 	// 从MainActivity传递过来的，当前登录用户
 	MyUser user;
 	@Bind(R.id.iv_header_add)
@@ -43,7 +42,9 @@ public class ShowActivity extends Activity {
 	ImageView ivNewPost;
 	List<MyPost> posts;
 	PostAdapter adapter;
-	NewPostReceiver receiver;
+
+	// 方法一 ,通过发广播,显示红点和音乐
+	// NewPostReceiver receiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,16 +70,20 @@ public class ShowActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		receiver = new NewPostReceiver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction("com.fgr.bmobdemo.ACTION_NEW_POST");
-		registerReceiver(receiver, filter);
+		// 方法一
+		// receiver = new NewPostReceiver();
+		// IntentFilter filter = new IntentFilter();
+		// filter.addAction("com.fgr.bmobdemo.ACTION_NEW_POST");
+		// registerReceiver(receiver, filter);
+		// 方法二
+		MyPushMessageReceiver.regist(this);
 		refresh();
 	}
 
 	@Override
 	protected void onPause() {
-		unregisterReceiver(receiver);// 写在super之前
+		// unregisterReceiver(receiver);// 写在super之前
+		MyPushMessageReceiver.unregist(this);
 		super.onPause();
 	}
 
@@ -133,16 +138,24 @@ public class ShowActivity extends Activity {
 		refresh();
 	}
 
-	public class NewPostReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-			if ("com.fgr.bmobdemo.ACTION_NEW_POST".equals(action)) {
-				// 显示红点
-				ivNewPost.setVisibility(View.VISIBLE);
-				// 播放声音
-				MyApp.palyer.start();
-			}
-		}
+	// 方法二
+	@Override
+	public void onNewPost() {
+		ivNewPost.setVisibility(View.VISIBLE);
+		MyApp.palyer.start();
 	}
+
+	// 方法一
+	// public class NewPostReceiver extends BroadcastReceiver {
+	// @Override
+	// public void onReceive(Context context, Intent intent) {
+	// String action = intent.getAction();
+	// if ("com.fgr.bmobdemo.ACTION_NEW_POST".equals(action)) {
+	// // 显示红点
+	// ivNewPost.setVisibility(View.VISIBLE);
+	// // 播放声音
+	// MyApp.palyer.start();
+	// }
+	// }
+	// }
 }

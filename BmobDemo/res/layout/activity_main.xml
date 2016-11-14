@@ -17,7 +17,7 @@
         android:id="@+id/et_main_password"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="8dp"
         android:hint="请输入密码..."
         android:inputType="textPassword" />
 
@@ -33,7 +33,7 @@
         android:id="@+id/btn_main_regist"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="8dp"
         android:background="@drawable/btn_blue_selector"
         android:onClick="regist"
         android:text="注册" />

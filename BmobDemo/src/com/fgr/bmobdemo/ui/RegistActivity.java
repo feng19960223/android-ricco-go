@@ -92,6 +92,7 @@ public class RegistActivity extends Activity {
 				ivAvatar.setImageResource(R.drawable.ic_launcher);
 				etUsername.setText("");
 				etPassword.setText("");
+				finish();
 			}
 
 			@Override

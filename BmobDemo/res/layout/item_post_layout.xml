@@ -9,15 +9,15 @@
     <LinearLayout
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:orientation="vertical" >
 
         <ImageView
             android:id="@+id/iv_item_avatar"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="4dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_launcher" />
 
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingLeft="5dp"
+            android:paddingLeft="4dp"
             android:singleLine="true"
             android:text="XXXXX"
             android:textColor="#ff000000"
@@ -51,7 +51,7 @@
             android:id="@+id/tv_item_posttime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="4dp"
             android:text="2016-08-02"
             android:textColor="#ff6e6e6e"
             android:textSize="14sp" />
@@ -60,8 +60,7 @@
             android:id="@+id/tv_item_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minLines="4"
-            android:padding="5dp"
+            android:padding="4dp"
             android:text="xxxxx"
             android:textColor="#ff6e6e6e"
             android:textSize="14sp" />
@@ -77,8 +76,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:text="更新"
                 android:textColor="#ff0000ff"
                 android:textSize="14sp" />
@@ -88,8 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:text="删除"
                 android:textColor="#ffff0000"
                 android:textSize="14sp" />

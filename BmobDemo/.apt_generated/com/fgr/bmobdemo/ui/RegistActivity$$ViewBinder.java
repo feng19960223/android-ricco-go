@@ -8,6 +8,12 @@ import butterknife.ButterKnife.ViewBinder;
 public class RegistActivity$$ViewBinder<T extends com.fgr.bmobdemo.ui.RegistActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
+    view = finder.findRequiredView(source, 2131230730, "field 'etPassword'");
+    target.etPassword = finder.castView(view, 2131230730, "field 'etPassword'");
+    view = finder.findRequiredView(source, 2131230729, "field 'etUsername'");
+    target.etUsername = finder.castView(view, 2131230729, "field 'etUsername'");
+    view = finder.findRequiredView(source, 2131230731, "field 'rgGender'");
+    target.rgGender = finder.castView(view, 2131230731, "field 'rgGender'");
     view = finder.findRequiredView(source, 2131230728, "field 'ivAvatar' and method 'setAvatar'");
     target.ivAvatar = finder.castView(view, 2131230728, "field 'ivAvatar'");
     view.setOnClickListener(
@@ -18,12 +24,6 @@ public class RegistActivity$$ViewBinder<T extends com.fgr.bmobdemo.ui.RegistActi
           target.setAvatar(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131230729, "field 'etUsername'");
-    target.etUsername = finder.castView(view, 2131230729, "field 'etUsername'");
-    view = finder.findRequiredView(source, 2131230731, "field 'rgGender'");
-    target.rgGender = finder.castView(view, 2131230731, "field 'rgGender'");
-    view = finder.findRequiredView(source, 2131230730, "field 'etPassword'");
-    target.etPassword = finder.castView(view, 2131230730, "field 'etPassword'");
     view = finder.findRequiredView(source, 2131230734, "method 'regist'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
@@ -36,9 +36,9 @@ public class RegistActivity$$ViewBinder<T extends com.fgr.bmobdemo.ui.RegistActi
   }
 
   @Override public void unbind(T target) {
-    target.ivAvatar = null;
+    target.etPassword = null;
     target.etUsername = null;
     target.rgGender = null;
-    target.etPassword = null;
+    target.ivAvatar = null;
   }
 }
