@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/BmobIM_SDK"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/library"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/progress_button_library"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/pulltorefreshlibrary"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PullToRefreshListFragment"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PullToRefreshViewPager"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
