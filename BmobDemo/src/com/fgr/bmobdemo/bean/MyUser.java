@@ -14,6 +14,15 @@ public class MyUser extends BmobObject {
 	// Bmob服务器数据表不支持Java的8种基本数据类型
 	// 使用时要将基本数据类型转为包装类型
 	private Boolean gender;// true 男,false 女
+	private String installationId;// 用户注册是登录时所使用的设备ID
+
+	public String getInstallationId() {
+		return installationId;
+	}
+
+	public void setInstallationId(String installationId) {
+		this.installationId = installationId;
+	}
 
 	public String getAvatar() {
 		return avatar;

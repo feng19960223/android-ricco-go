@@ -54,7 +54,7 @@
             android:label="@string/title_activity_show" >
         </activity>
         <activity
-            android:name="com.fgr.bmobdemo.ui.PostActivity"
+            android:name=".ui.PostActivity"
             android:label="@string/title_activity_add" >
         </activity>
 
@@ -80,11 +80,16 @@
             </intent-filter>
         </receiver>
         <!-- 创建的消息接收器，进行注册 -->
-        <receiver android:name="com.fgr.bmobdemo.receiver.MyPushMessageReceiver" >
+        <receiver android:name=".receiver.MyPushMessageReceiver" >
             <intent-filter>
                 <action android:name="cn.bmob.push.action.MESSAGE" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.fgr.bmobdemo.ui.UserActivity"
+            android:label="@string/title_activity_user" >
+        </activity>
     </application>
 
 </manifest>

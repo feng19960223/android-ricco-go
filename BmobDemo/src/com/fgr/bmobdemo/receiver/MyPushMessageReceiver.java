@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import com.fgr.bmobdemo.R;
+
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -55,6 +59,26 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
 							}
 						}
 					}
+					if ("one".equals(tag)) {// @
+						if (list.size() > 0) {
+							for (EventListener eventListener : list) {
+								eventListener.onAtone();
+							}
+						} else {// 没有订阅者
+							NotificationManager manager = (NotificationManager) context
+									.getSystemService(Context.NOTIFICATION_SERVICE);
+							Notification.Builder builder = new Notification.Builder(
+									context);
+							builder.setSmallIcon(R.drawable.ic_launcher);
+							builder.setTicker("有人刚刚发帖@了你");
+							builder.setContentTitle("@通知");
+							builder.setContentText("有人刚刚发帖@了你");
+							builder.setContentInfo("通知");
+							builder.setAutoCancel(true);// 点击后消失
+							Notification notification = builder.build();
+							manager.notify(1, notification);
+						}
+					}
 				}
 			} catch (Exception e) {
 			}
@@ -64,5 +88,7 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
 	// 每一个接口的实现这就是一个观察者
 	public interface EventListener {
 		void onNewPost();
+
+		void onAtone();
 	}
 }

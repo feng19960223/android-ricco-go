@@ -140,9 +140,16 @@ public class ShowActivity extends Activity implements EventListener {
 
 	// 方法二
 	@Override
-	public void onNewPost() {
+	public void onNewPost() {// 有新帖
 		ivNewPost.setVisibility(View.VISIBLE);
 		MyApp.palyer.start();
+	}
+
+	@Override
+	public void onAtone() {// @
+		ivNewPost.setVisibility(View.VISIBLE);
+		MyApp.palyer.start();
+		Toast.makeText(this, "刚刚有人发帖@了您", Toast.LENGTH_SHORT).show();
 	}
 
 	// 方法一

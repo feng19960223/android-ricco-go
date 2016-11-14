@@ -20,14 +20,14 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:hint="请输入用户名..." />
+        android:hint="用户名" />
 
     <EditText
         android:id="@+id/et_regist_password"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:hint="请输入密码..."
+        android:hint="密码"
         android:inputType="textPassword" />
 
     <RadioGroup

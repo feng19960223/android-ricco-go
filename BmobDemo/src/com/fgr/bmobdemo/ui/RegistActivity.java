@@ -22,6 +22,7 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadFileListener;
@@ -83,6 +84,9 @@ public class RegistActivity extends Activity {
 		}
 		user.setGender(gender);
 		// 把用户对象保存到Bmob服务器
+		// 添加当前所使用设备的设备id
+		user.setInstallationId(BmobInstallation.getInstallationId(this));
+
 		user.save(this, new SaveListener() {
 			@Override
 			public void onSuccess() {

@@ -20,10 +20,15 @@ import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.BmobPushManager;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 import com.fgr.bmobdemo.R;
 import com.fgr.bmobdemo.bean.MyUser;
 
+/**
+ * 使用注释的方法,方法名可以不一样,但是返回值和参数列表必须一样
+ *
+ */
 public class MainActivity extends Activity {
 	@Bind(R.id.et_main_username)
 	EditText etUsername;
@@ -57,7 +62,7 @@ public class MainActivity extends Activity {
 		// 发起查询
 		query.findObjects(this, new FindListener<MyUser>() {
 			@Override
-			public void onSuccess(List<MyUser> arg0) {
+			public void onSuccess(final List<MyUser> arg0) {
 				// 服务器对查询的请求做出了响应
 				// 将查询结果作为参数传入到onSuccess方法中
 				if (arg0 != null && arg0.size() > 0) {
@@ -93,13 +98,30 @@ public class MainActivity extends Activity {
 						} catch (Exception e) {
 						}
 						manager.pushMessageAll(jsonObject);
-						// 跳转界面
-						Intent intent = new Intent(MainActivity.this,
-								ShowActivity.class);
+						// 更新设备id
+						MyUser user = arg0.get(0);
+						user.setInstallationId(BmobInstallation
+								.getInstallationId(MainActivity.this));
+						user.update(MainActivity.this, new UpdateListener() {
 
-						intent.putExtra("user", arg0.get(0));
-						startActivity(intent);
-						finish();
+							@Override
+							public void onSuccess() {
+								// 跳转界面
+								Intent intent = new Intent(MainActivity.this,
+										ShowActivity.class);
+								intent.putExtra("user", arg0.get(0));
+								startActivity(intent);
+								finish();
+							}
+
+							@Override
+							public void onFailure(int arg0, String arg1) {
+								Toast.makeText(MainActivity.this,
+										"更新设备ID失败,请稍后重试", Toast.LENGTH_SHORT)
+										.show();
+							}
+						});
+
 					} else {
 						Toast.makeText(MainActivity.this, "用户名或密码错误",
 								Toast.LENGTH_SHORT).show();

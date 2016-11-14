@@ -7,5 +7,6 @@
     <string name="title_activity_regist">RegistActivity</string>
     <string name="title_activity_show">ShowActivity</string>
     <string name="title_activity_add">AddActivity</string>
+    <string name="title_activity_user">UserActivity</string>
 
 </resources>
