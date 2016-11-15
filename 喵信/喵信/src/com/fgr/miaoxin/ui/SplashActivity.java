@@ -1,14 +1,5 @@
 package com.fgr.miaoxin.ui;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.location.LocationClientOption.LocationMode;
-import com.fgr.miaoxin.R;
-import com.fgr.miaoxin.app.MyApp;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,20 +8,27 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import butterknife.Bind;
-import butterknife.ButterKnife;
+import cn.bmob.im.BmobUserManager;
+import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.v3.datatype.BmobGeoPoint;
+
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.location.LocationClientOption.LocationMode;
+import com.fgr.miaoxin.R;
+import com.fgr.miaoxin.app.MyApp;
 
 /**
  * 喵信的欢迎页面
  * 
- * 1)定位 2)动画效果 3)界面跳转 </br>*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</br>使用
- * butterknife.Bind时注意要配置Eclipse </br> 右键项目-->Properties-->Java
- * Compiler-->Annotation Processin-->Factory Path-->Add JARs </br> 所以选项框打勾
+ * 1)定位 2)动画效果 3)界面跳转
  * 
- * @author 冯国芮
+ * @author pjy
  *
  */
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseActivity {
 	@Bind(R.id.tv_splash_miao)
 	TextView tvMiao;// "喵"
 
@@ -43,8 +41,18 @@ public class SplashActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// setContentView(R.layout.activity_splash);
+		// ButterKnife.bind(this);
+	}
+
+	@Override
+	public void setMyContentView() {
 		setContentView(R.layout.activity_splash);
-		ButterKnife.bind(this);
+	}
+
+	@Override
+	public void init() {
+		super.init();
 		getLocation();
 	}
 
@@ -132,10 +140,23 @@ public class SplashActivity extends Activity {
 				tvMiao.setVisibility(View.VISIBLE);
 				tvXin.setVisibility(View.VISIBLE);
 				// 动画结束后，跳转界面
-				Intent intent = new Intent(SplashActivity.this,
-						MainActivity.class);
-				startActivity(intent);
-				finish();
+				// 根据当前设备是否有处于登录状态的用户
+				BmobUserManager userManager = BmobUserManager
+						.getInstance(SplashActivity.this);
+				BmobChatUser user = userManager.getCurrentUser();
+				if (user != null) {
+					// 如果有，向MainActivity跳转
+					Intent intent = new Intent(SplashActivity.this,
+							MainActivity.class);
+					startActivity(intent);
+					finish();
+				} else {
+					// 如果没有，向LoginActivity跳转
+					Intent intent = new Intent(SplashActivity.this,
+							LoginActivity.class);
+					startActivity(intent);
+					finish();
+				}
 
 			}
 		});

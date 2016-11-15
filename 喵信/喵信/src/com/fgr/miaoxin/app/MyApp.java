@@ -1,15 +1,15 @@
 package com.fgr.miaoxin.app;
 
+import android.app.Application;
+import android.media.MediaPlayer;
+import cn.bmob.im.BmobChat;
+import cn.bmob.v3.datatype.BmobGeoPoint;
+
 import com.baidu.mapapi.SDKInitializer;
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.constant.Constant;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
-import cn.bmob.im.BmobChat;
-import cn.bmob.v3.datatype.BmobGeoPoint;
-import android.app.Application;
-import android.media.MediaPlayer;
 
 public class MyApp extends Application {
 	public static MyApp context;// иообнд

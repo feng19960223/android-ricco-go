@@ -23,5 +23,14 @@
     <declare-styleable name="Themes">
         <attr name="numberProgressBarStyle" format="reference" />
     </declare-styleable>
+    <declare-styleable name="MyTabIcon">
+        <attr name="tabicon_drawable" format="reference" />
+        <attr name="tabicon_text" format="string" />
+        <attr name="tabicon_color" format="color" />
+        <attr name="tabicon_textsize" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="MyLetterView">
+        <attr name="font_color" format="color" />
+    </declare-styleable>
 
 </resources>

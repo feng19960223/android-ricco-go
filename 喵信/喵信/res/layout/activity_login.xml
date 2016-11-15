@@ -1,0 +1,85 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/headerview"
+        layout="@layout/headerview_layout" />
+
+    <ImageView
+        android:id="@+id/iv_login_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:src="@drawable/login_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/input_bg"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin" >
+
+        <EditText
+            android:id="@+id/et_login_username"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_login_username"
+            android:drawablePadding="@dimen/activity_horizontal_margin"
+            android:hint="请输入用户名..." />
+
+        <EditText
+            android:id="@+id/et_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_login_password"
+            android:drawablePadding="@dimen/activity_horizontal_margin"
+            android:hint="请输入密码..."
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_login_login"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/btn_blue_selector"
+        android:text="登 录"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/activity_vertical_margin" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="还没有喵信号？"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_login_regist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赶快注册一个吧>>>"
+            android:textColor="@color/blueviolet"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

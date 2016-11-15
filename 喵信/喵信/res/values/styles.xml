@@ -104,4 +104,10 @@
         <item name="progress_unreached_bar_height">0.75dp</item>
     </style>
 
+    <style name="HeaderImage">
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
 </resources>
