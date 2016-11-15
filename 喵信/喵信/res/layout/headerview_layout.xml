@@ -2,15 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/black"
+    android:background="#353535"
     android:orientation="horizontal" >
 
     <ImageView
         android:id="@+id/iv_headerview_left"
         style="@style/HeaderImage"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_launcher"
-        android:visibility="invisible" />
+        android:layout_marginLeft="@dimen/activity_horizontal_margin" />
 
     <TextView
         android:id="@+id/tv_headerview_title"
@@ -26,8 +24,6 @@
     <ImageView
         android:id="@+id/iv_headerview_right"
         style="@style/HeaderImage"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_launcher"
-        android:visibility="invisible" />
+        android:layout_marginRight="@dimen/activity_horizontal_margin" />
 
 </LinearLayout>

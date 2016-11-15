@@ -1,6 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
     <include
@@ -28,20 +30,24 @@
             android:id="@+id/et_login_username"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_marginRight="8dp"
             android:background="@null"
             android:drawableLeft="@drawable/ic_login_username"
             android:drawablePadding="@dimen/activity_horizontal_margin"
-            android:hint="请输入用户名..." />
+            android:hint="请输入喵喵号..."
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/et_login_password"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_marginRight="8dp"
             android:background="@null"
             android:drawableLeft="@drawable/ic_login_password"
             android:drawablePadding="@dimen/activity_horizontal_margin"
             android:hint="请输入密码..."
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:singleLine="true" />
     </LinearLayout>
 
     <Button
@@ -64,21 +70,21 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:layout_marginBottom="@dimen/activity_vertical_margin" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="还没有喵信号？"
+            android:text="还没有喵号？"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_login_regist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="赶快注册一个吧>>>"
-            android:textColor="@color/blueviolet"
+            android:text="注册一个>>>"
+            android:textColor="@color/teal"
             android:textSize="18sp" />
     </LinearLayout>
 

@@ -1,6 +1,5 @@
 package com.fgr.miaoxin.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -8,7 +7,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import butterknife.Bind;
-import cn.bmob.im.BmobUserManager;
 import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
@@ -141,21 +139,23 @@ public class SplashActivity extends BaseActivity {
 				tvXin.setVisibility(View.VISIBLE);
 				// 动画结束后，跳转界面
 				// 根据当前设备是否有处于登录状态的用户
-				BmobUserManager userManager = BmobUserManager
-						.getInstance(SplashActivity.this);
+				// BmobUserManager userManager =
+				// BmobUserManager.getInstance(SplashActivity.this);
 				BmobChatUser user = userManager.getCurrentUser();
 				if (user != null) {
 					// 如果有，向MainActivity跳转
-					Intent intent = new Intent(SplashActivity.this,
-							MainActivity.class);
-					startActivity(intent);
-					finish();
+					// Intent intent = new
+					// Intent(SplashActivity.this,MainActivity.class);
+					// startActivity(intent);
+					// finish();
+					jumpTo(MainActivity.class, true);
 				} else {
 					// 如果没有，向LoginActivity跳转
-					Intent intent = new Intent(SplashActivity.this,
-							LoginActivity.class);
-					startActivity(intent);
-					finish();
+					// Intent intent = new
+					// Intent(SplashActivity.this,LoginActivity.class);
+					// startActivity(intent);
+					// finish();
+					jumpTo(LoginActivity.class, true);
 				}
 
 			}
