@@ -2,11 +2,11 @@ package com.fgr.miaoxin.ui;
 
 import java.util.Locale;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,7 +19,6 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.BmobUserManager;
-import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.db.BmobDB;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -30,7 +29,7 @@ import com.fgr.miaoxin.constant.Constant;
 import com.fgr.miaoxin.constant.Constant.Position;
 import com.fgr.miaoxin.util.WindowUtil;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends FragmentActivity {
 
 	// 公共属性
 	// BmobIMSDK提供的一个工具类
@@ -55,8 +54,15 @@ public abstract class BaseActivity extends Activity {
 		chatManager = BmobChatManager.getInstance(MyApp.context);
 		bmobDB = BmobDB.create(MyApp.context);
 		toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+		MyApp.activities.add(this);
 		initLayout();
 		init();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		MyApp.activities.remove(this);
 	}
 
 	/**

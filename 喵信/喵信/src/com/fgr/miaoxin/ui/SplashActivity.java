@@ -9,6 +9,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.v3.datatype.BmobGeoPoint;
+import cn.bmob.v3.listener.UpdateListener;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -143,14 +144,32 @@ public class SplashActivity extends BaseActivity {
 				// BmobUserManager.getInstance(SplashActivity.this);
 				BmobChatUser user = userManager.getCurrentUser();
 				if (user != null) {
-					// TODO 更新位置
+					// 更新位置
+					updateUserLocation(new UpdateListener() {
 
+						@Override
+						public void onSuccess() {
+							jumpTo(MainActivity.class, true);
+						}
+
+						@Override
+						public void onFailure(int arg0, String arg1) {
+							switch (arg0) {
+							case 206:// 更新位置失败
+								MyApp.logout();
+								break;
+							default:
+								toastAndLog("获取位置失败 ", arg0, arg1);
+								break;
+							}
+						}
+					});
 					// 如果有，向MainActivity跳转
 					// Intent intent = new
 					// Intent(SplashActivity.this,MainActivity.class);
 					// startActivity(intent);
 					// finish();
-					jumpTo(MainActivity.class, true);
+					// jumpTo(MainActivity.class, true);
 				} else {
 					// 如果没有，向LoginActivity跳转
 					// Intent intent = new

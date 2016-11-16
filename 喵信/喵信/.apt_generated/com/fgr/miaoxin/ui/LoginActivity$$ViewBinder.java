@@ -8,8 +8,8 @@ import butterknife.ButterKnife.ViewBinder;
 public class LoginActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.LoginActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165206, "field 'etUsername' and method 'recover2'");
-    target.etUsername = finder.castView(view, 2131165206, "field 'etUsername'");
+    view = finder.findRequiredView(source, 2131165207, "field 'etPassword' and method 'recover1'");
+    target.etPassword = finder.castView(view, 2131165207, "field 'etPassword'");
     ((android.widget.TextView) view).addTextChangedListener(
       new android.text.TextWatcher() {
         @Override public void onTextChanged(
@@ -18,7 +18,7 @@ public class LoginActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.LoginActivit
           int p2,
           int p3
         ) {
-          target.recover2(finder.<android.text.Editable>castParam(p0, "onTextChanged", 0, "recover2", 0));
+          target.recover1(finder.<android.text.Editable>castParam(p0, "onTextChanged", 0, "recover1", 0));
         }
         @Override public void beforeTextChanged(
           java.lang.CharSequence p0,
@@ -34,8 +34,8 @@ public class LoginActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.LoginActivit
           
         }
       });
-    view = finder.findRequiredView(source, 2131165207, "field 'etPassword' and method 'recover1'");
-    target.etPassword = finder.castView(view, 2131165207, "field 'etPassword'");
+    view = finder.findRequiredView(source, 2131165206, "field 'etUsername' and method 'recover2'");
+    target.etUsername = finder.castView(view, 2131165206, "field 'etUsername'");
     ((android.widget.TextView) view).addTextChangedListener(
       new android.text.TextWatcher() {
         @Override public void onTextChanged(
@@ -44,7 +44,7 @@ public class LoginActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.LoginActivit
           int p2,
           int p3
         ) {
-          target.recover1(finder.<android.text.Editable>castParam(p0, "onTextChanged", 0, "recover1", 0));
+          target.recover2(finder.<android.text.Editable>castParam(p0, "onTextChanged", 0, "recover2", 0));
         }
         @Override public void beforeTextChanged(
           java.lang.CharSequence p0,
@@ -82,8 +82,8 @@ public class LoginActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.LoginActivit
   }
 
   @Override public void unbind(T target) {
-    target.etUsername = null;
     target.etPassword = null;
+    target.etUsername = null;
     target.btnLogin = null;
   }
 }

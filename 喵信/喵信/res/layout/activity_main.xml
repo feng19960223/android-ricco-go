@@ -1,15 +1,90 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:myapp="http://schemas.android.com/apk/res/com.tarena.miaoxin"
+    xmlns:myapp="http://schemas.android.com/apk/res/com.fgr.miaoxin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn_main_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="登出" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#AFAFAF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="horizontal" >
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <com.fgr.miaoxin.view.MyTabIcon
+                android:id="@+id/mti_main_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                myapp:tabicon_color="@color/wxl"
+                myapp:tabicon_drawable="@drawable/tab_icon_message"
+                myapp:tabicon_text="喵信" />
+
+            <com.fgr.miaoxin.view.BadgeView
+                android:id="@+id/bv_main_unreadmsgcount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <com.fgr.miaoxin.view.MyTabIcon
+                android:id="@+id/mti_main_friend"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                myapp:tabicon_color="@color/wxl"
+                myapp:tabicon_drawable="@drawable/tab_icon_contact"
+                myapp:tabicon_text="喵友" />
+
+            <ImageView
+                android:id="@+id/iv_main_newinvitation"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_new_msg_tips"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+        <com.fgr.miaoxin.view.MyTabIcon
+            android:id="@+id/mti_main_find"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            myapp:tabicon_color="@color/wxl"
+            myapp:tabicon_drawable="@drawable/tab_icon_find"
+            myapp:tabicon_text="喵圈" />
+
+        <com.fgr.miaoxin.view.MyTabIcon
+            android:id="@+id/mti_main_setting"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            myapp:tabicon_color="@color/wxl"
+            myapp:tabicon_drawable="@drawable/tab_icon_setting"
+            myapp:tabicon_text="设置" />
+    </LinearLayout>
 
 </LinearLayout>
