@@ -378,7 +378,7 @@ public class BmobUserManager{
 			@Override
 			public void onSuccess(List<BmobChatInstallation> object) {
 				// TODO Auto-generated method stub
-				if(object.size() > 0){
+				if(object.size() >= 0){
 //					BmobLog.i("updateInstallation-->onSuccess："+object.get(0).getInstallationId());
 					BmobChatInstallation mbi = object.get(0);
 					mbi.setUid(username);
