@@ -19,10 +19,13 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.BmobUserManager;
+import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.db.BmobDB;
+import cn.bmob.v3.listener.UpdateListener;
 
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.app.MyApp;
+import com.fgr.miaoxin.bean.MyUser;
 import com.fgr.miaoxin.constant.Constant;
 import com.fgr.miaoxin.constant.Constant.Position;
 import com.fgr.miaoxin.util.WindowUtil;
@@ -205,7 +208,7 @@ public abstract class BaseActivity extends Activity {
 
 	public void toastAndLog(String text, int error, String msg) {
 		toast(text);
-		log("执行" + text + "出现错误，错误代码：" + error + ": " + msg);
+		log(text + ",出现错误，错误代码：" + error + ": " + msg);
 	}
 
 	// 界面跳转的相关方法
@@ -246,4 +249,19 @@ public abstract class BaseActivity extends Activity {
 		return false;
 	}
 
+	/**
+	 * 更新当前设备上登录用户的位置
+	 */
+	public void updateUserLocation(UpdateListener listener) {
+		MyUser user = userManager.getCurrentUser(MyUser.class);
+		if (user != null) {
+			// 更新当前设备上登录用户的位置
+			user.setLocation(MyApp.lastPoint);
+			if (listener != null) {
+				user.update(this, listener);
+			} else {
+				user.update(this);
+			}
+		}
+	}
 }

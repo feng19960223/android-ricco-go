@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.fgr.miaoxin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="true"
@@ -142,14 +143,19 @@
         </RadioGroup>
     </LinearLayout>
 
-    <Button
+    <!-- 高度一定要确定,CircularProgressButton有不同的状态,影响布局 -->
+    <!-- app:cpb_textComplete="注册成功"app:cpb_textError="注册失败" ,可以使用文字也可以图片 -->
+
+    <com.dd.CircularProgressButton
         android:id="@+id/btn_regist_regist"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:background="@drawable/btn_blue_selector"
-        android:text="注 册"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:cpb_iconComplete="@drawable/ic_cpb_action_accept"
+        app:cpb_iconError="@drawable/ic_cpb_action_cancel"
+        app:cpb_textIdle="注册" />
 
 </LinearLayout>

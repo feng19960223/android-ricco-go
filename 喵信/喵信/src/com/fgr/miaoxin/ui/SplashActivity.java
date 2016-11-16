@@ -143,6 +143,8 @@ public class SplashActivity extends BaseActivity {
 				// BmobUserManager.getInstance(SplashActivity.this);
 				BmobChatUser user = userManager.getCurrentUser();
 				if (user != null) {
+					// TODO 更新位置
+
 					// 如果有，向MainActivity跳转
 					// Intent intent = new
 					// Intent(SplashActivity.this,MainActivity.class);
