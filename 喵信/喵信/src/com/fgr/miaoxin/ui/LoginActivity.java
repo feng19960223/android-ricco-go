@@ -88,7 +88,7 @@ public class LoginActivity extends BaseActivity {
 		// 更新为当前所使用设备的设备ID，deviceType改为“android”
 
 		// userManager.login内部完成的内容类似:当前帐号已在其他设备登录,然后可以找回密码...,(不允许一个帐号同时登录两个设备)
-		userManager.login(user, new SaveListener() {
+		bmobUserManager.login(user, new SaveListener() {
 			@Override
 			public void onSuccess() {
 				// 登录成功

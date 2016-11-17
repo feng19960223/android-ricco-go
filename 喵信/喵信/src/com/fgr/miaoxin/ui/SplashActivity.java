@@ -142,7 +142,7 @@ public class SplashActivity extends BaseActivity {
 				// 根据当前设备是否有处于登录状态的用户
 				// BmobUserManager userManager =
 				// BmobUserManager.getInstance(SplashActivity.this);
-				BmobChatUser user = userManager.getCurrentUser();
+				BmobChatUser user = bmobUserManager.getCurrentUser();
 				if (user != null) {
 					// 更新位置
 					updateUserLocation(new UpdateListener() {

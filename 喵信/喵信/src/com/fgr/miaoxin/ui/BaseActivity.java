@@ -34,10 +34,10 @@ public abstract class BaseActivity extends FragmentActivity {
 	// 公共属性
 	// BmobIMSDK提供的一个工具类
 	// 用来“管理”用户（用户的登录，登出，添加好友，删除好友）
-	BmobUserManager userManager;
+	BmobUserManager bmobUserManager;
 	// BmobIMSDK提供的一个工具类
 	// 用来“管理”聊天内容（聊天内容的创建、发送、删除、存储）
-	BmobChatManager chatManager;
+	BmobChatManager bmobChatManager;
 	// BmobIMSDK提供的一个工具类
 	// 用来“管理”本地数据库
 	BmobDB bmobDB;
@@ -50,8 +50,8 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		WindowUtil.translucent(getWindow());
-		userManager = BmobUserManager.getInstance(MyApp.context);
-		chatManager = BmobChatManager.getInstance(MyApp.context);
+		bmobUserManager = BmobUserManager.getInstance(MyApp.context);
+		bmobChatManager = BmobChatManager.getInstance(MyApp.context);
 		bmobDB = BmobDB.create(MyApp.context);
 		toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 		MyApp.activities.add(this);
@@ -259,7 +259,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	 * 更新当前设备上登录用户的位置
 	 */
 	public void updateUserLocation(UpdateListener listener) {
-		MyUser user = userManager.getCurrentUser(MyUser.class);
+		MyUser user = bmobUserManager.getCurrentUser(MyUser.class);
 		if (user != null) {
 			// 更新当前设备上登录用户的位置
 			user.setLocation(MyApp.lastPoint);
@@ -269,5 +269,10 @@ public abstract class BaseActivity extends FragmentActivity {
 				user.update(this);
 			}
 		}
+	}
+
+	// 手动为headerView属性赋值的方法
+	public void setHeaderView(View headerView) {
+		this.headerView = headerView;
 	}
 }

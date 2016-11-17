@@ -13,10 +13,42 @@
         android:layout_height="0dp"
         android:layout_weight="1" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fragment_find" />
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/ptr_find_blogs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+        <LinearLayout
+            android:id="@+id/ll_find_commentcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="3dp"
+            android:background="@color/lightgray"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="invisible" >
+
+            <EditText
+                android:id="@+id/et_find_comment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:maxLines="2" />
+
+            <Button
+                android:id="@+id/btn_find_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/btn_red_selector"
+                android:padding="8dp"
+                android:text="评论"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
     </FrameLayout>
 
 </LinearLayout>

@@ -2,95 +2,103 @@
     xmlns:app="http://schemas.android.com/apk/res/com.fgr.miaoxin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#353535"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
-    <include
-        android:id="@+id/headerview"
-        layout="@layout/headerview_layout" />
-
-    <ImageView
-        android:id="@+id/iv_login_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:src="@drawable/login_icon" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:background="@drawable/input_bg"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin" >
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/et_login_username"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginRight="8dp"
-            android:background="@null"
-            android:drawableLeft="@drawable/ic_login_username"
-            android:drawablePadding="@dimen/activity_horizontal_margin"
-            android:hint="请输入喵喵号..."
-            android:singleLine="true" />
+        <include
+            android:id="@+id/headerview"
+            layout="@layout/headerview_layout" />
 
-        <EditText
-            android:id="@+id/et_login_password"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginRight="8dp"
-            android:background="@null"
-            android:drawableLeft="@drawable/ic_login_password"
-            android:drawablePadding="@dimen/activity_horizontal_margin"
-            android:hint="请输入密码..."
-            android:inputType="textPassword"
-            android:singleLine="true" />
-    </LinearLayout>
-    <!-- 高度一定要确定,CircularProgressButton有不同的状态,影响布局 -->
-    <!-- app:cpb_textComplete="注册成功"app:cpb_textError="注册失败" ,可以使用文字也可以图片 -->
-
-    <com.dd.CircularProgressButton
-        android:id="@+id/btn_login_login"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="45dp"
-        android:background="@drawable/btn_blue_selector"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:cpb_iconComplete="@drawable/ic_cpb_action_accept"
-        app:cpb_iconError="@drawable/ic_cpb_action_cancel"
-        app:cpb_textIdle="登 录" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/activity_vertical_margin" >
-
-        <TextView
+        <ImageView
+            android:id="@+id/iv_login_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="还没有喵号？"
-            android:textSize="18sp" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:src="@drawable/login_icon" />
 
-        <TextView
-            android:id="@+id/tv_login_regist"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:background="@drawable/input_bg"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin" >
+
+            <EditText
+                android:id="@+id/et_login_username"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginRight="8dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_login_username"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:hint="请输入喵喵号..."
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/et_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginRight="8dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_login_password"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:hint="请输入密码..."
+                android:inputType="textPassword"
+                android:singleLine="true" />
+        </LinearLayout>
+        <!-- 高度一定要确定,CircularProgressButton有不同的状态,影响布局 -->
+        <!-- app:cpb_textComplete="注册成功"app:cpb_textError="注册失败" ,可以使用文字也可以图片 -->
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/btn_login_login"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/btn_blue_selector"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:cpb_iconComplete="@drawable/ic_cpb_action_accept"
+            app:cpb_iconError="@drawable/ic_cpb_action_cancel"
+            app:cpb_textIdle="登 录" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="注册一个>>>"
-            android:textColor="@color/teal"
-            android:textSize="18sp" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/activity_vertical_margin" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="还没有喵号？"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_login_regist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="注册一个>>>"
+                android:textColor="@color/teal"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

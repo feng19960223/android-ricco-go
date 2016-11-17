@@ -1,6 +1,7 @@
 package com.fgr.miaoxin.fragment;
 
 import com.fgr.miaoxin.R;
+import com.fgr.miaoxin.constant.Constant.Position;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,4 +23,9 @@ public class FriendFragment extends BaseFragment {
 		return view;
 	}
 
+	@Override
+	public void init() {
+		super.init();
+		setHeaderTitle("ß÷ÓÑ", Position.CENTER);
+	}
 }

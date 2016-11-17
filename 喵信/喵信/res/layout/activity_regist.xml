@@ -2,160 +2,168 @@
     xmlns:app="http://schemas.android.com/apk/res/com.fgr.miaoxin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#353535"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
-    <include
-        android:id="@+id/headerview"
-        layout="@layout/headerview_layout" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/input_bg" >
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/usual_padding"
-            android:text="用户名"
-            android:textSize="18sp" />
+        <include
+            android:id="@+id/headerview"
+            layout="@layout/headerview_layout" />
 
-        <EditText
-            android:id="@+id/et_regist_username"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
-            android:layout_weight="3"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="请输入用户名..."
-            android:paddingLeft="@dimen/usual_padding"
-            android:singleLine="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/input_bg" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/usual_padding"
+                android:text="用户名"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/et_regist_username"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入用户名..."
+                android:paddingLeft="@dimen/usual_padding"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/input_bg" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/usual_padding"
+                android:text="密码"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/et_regist_password"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入密码..."
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/usual_padding"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/input_bg" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/usual_padding"
+                android:text="确认密码"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/et_regist_repassword"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入密码..."
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/usual_padding"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/input_bg" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/usual_padding"
+                android:text="性别"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:id="@+id/rg_regist_gender"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/usual_padding" >
+
+                <RadioButton
+                    android:id="@+id/rb_regist_boy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:checked="true"
+                    android:drawableRight="@drawable/boy" />
+
+                <RadioButton
+                    android:id="@+id/rb_regist_girl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/girl" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- 高度一定要确定,CircularProgressButton有不同的状态,影响布局 -->
+        <!-- app:cpb_textComplete="注册成功"app:cpb_textError="注册失败" ,可以使用文字也可以图片 -->
+
+        <com.dd.CircularProgressButton
+            android:id="@+id/btn_regist_regist"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/btn_blue_selector"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:cpb_iconComplete="@drawable/ic_cpb_action_accept"
+            app:cpb_iconError="@drawable/ic_cpb_action_cancel"
+            app:cpb_textIdle="注册" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/input_bg" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/usual_padding"
-            android:text="密码"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/et_regist_password"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
-            android:layout_weight="3"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="请输入密码..."
-            android:inputType="textPassword"
-            android:paddingLeft="@dimen/usual_padding"
-            android:singleLine="true" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/input_bg" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/usual_padding"
-            android:text="确认密码"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/et_regist_repassword"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
-            android:layout_weight="3"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="请输入密码..."
-            android:inputType="textPassword"
-            android:paddingLeft="@dimen/usual_padding"
-            android:singleLine="true" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/input_bg" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/usual_padding"
-            android:text="性别"
-            android:textSize="18sp" />
-
-        <RadioGroup
-            android:id="@+id/rg_regist_gender"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/usual_padding" >
-
-            <RadioButton
-                android:id="@+id/rb_regist_boy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:checked="true"
-                android:drawableRight="@drawable/boy" />
-
-            <RadioButton
-                android:id="@+id/rb_regist_girl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/girl" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <!-- 高度一定要确定,CircularProgressButton有不同的状态,影响布局 -->
-    <!-- app:cpb_textComplete="注册成功"app:cpb_textError="注册失败" ,可以使用文字也可以图片 -->
-
-    <com.dd.CircularProgressButton
-        android:id="@+id/btn_regist_regist"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:background="@drawable/btn_blue_selector"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:cpb_iconComplete="@drawable/ic_cpb_action_accept"
-        app:cpb_iconError="@drawable/ic_cpb_action_cancel"
-        app:cpb_textIdle="注册" />
 
 </LinearLayout>

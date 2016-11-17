@@ -135,7 +135,7 @@ public class RegistActivity extends BaseActivity {
 				// 当前设备所对应的数据记录的uid字段的值
 				// 将其值改为刚刚注册并登录成功的用户的username
 				// 更新Bmob数据库,让用户名和手机绑定
-				userManager.bindInstallationForRegister(user.getUsername());
+				bmobUserManager.bindInstallationForRegister(user.getUsername());
 				// 登录成功后，界面跳转到主界面
 				jumpTo(MainActivity.class, true);
 

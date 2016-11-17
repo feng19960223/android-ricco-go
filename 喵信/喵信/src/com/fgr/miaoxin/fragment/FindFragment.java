@@ -1,6 +1,7 @@
 package com.fgr.miaoxin.fragment;
 
 import com.fgr.miaoxin.R;
+import com.fgr.miaoxin.constant.Constant.Position;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +20,12 @@ public class FindFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_find, container, false);
 		return view;
+	}
+
+	@Override
+	public void init() {
+		super.init();
+		setHeaderTitle("ß÷È¦", Position.CENTER);
 	}
 
 }

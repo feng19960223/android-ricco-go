@@ -144,8 +144,15 @@ public class MyTabIcon extends View {
 		drawColorBitmap(canvas, left, top);
 	}
 
+	/**
+	 * 画彩色的图片
+	 * 
+	 * @param canvas
+	 * @param left
+	 * @param top
+	 */
 	private void drawColorBitmap(Canvas canvas, float left, float top) {
-		// 1)画一副彩色的图片
+		// 1)创建一副彩色的图片
 		Bitmap colorBitmap = Bitmap.createBitmap(bitmap.getWidth(),
 				bitmap.getHeight(), Bitmap.Config.ARGB_8888);
 		// 通过myCanvas来绘制空白的colorBitmap
