@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import butterknife.ButterKnife;
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.BmobUserManager;
@@ -109,6 +110,12 @@ public abstract class BaseFragment extends Fragment {
 	public void setHeaderTitle(String title, Position position) {
 		baseActivity.setHeaderView(headerView);
 		baseActivity.setHeaderTitle(title, position);
+	}
+
+	public void setHeaderImage(Position pos, int resId, boolean colorFilter,
+			OnClickListener listener) {
+		baseActivity.setHeaderView(headerView);
+		baseActivity.setHeaderImage(pos, resId, colorFilter, listener);
 	}
 
 	// ÍÂË¾ºÍlog

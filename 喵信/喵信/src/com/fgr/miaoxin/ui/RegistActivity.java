@@ -51,7 +51,7 @@ public class RegistActivity extends BaseActivity {
 
 	private void initHeaderView() {
 		setHeaderTitle("»¶Ó­×¢²á");
-		setHeaderImage(Position.LEFT, R.drawable.back_arrow_2, true,
+		setHeaderImage(Position.START, R.drawable.back_arrow_2, true,
 				new OnClickListener() {
 
 					@Override

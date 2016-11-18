@@ -5,52 +5,54 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
-import com.fgr.miaoxin.app.MyApp;
+import com.fgr.miaoxin.constant.Constant;
 
+/**
+ * 操作偏好设置文件的工具类
+ * 
+ * @author pjy
+ *
+ */
 public class SPUtil {
-	public static Editor editor;
-	public SharedPreferences sp;
+	SharedPreferences sp;
+	private static Editor editor;
 
-	private static final String NOTIFICATION = "notification";
-	private static final String SOUND = "sound";
-	private static final String VIBRATE = "vibrate";
+	public static final String NOTIFICATION = "notification";
 
-	public SPUtil(String filename) {
-		sp = MyApp.context.getSharedPreferences(filename, Context.MODE_PRIVATE);
+	public SPUtil(Context context, String name) {
+		sp = context.getSharedPreferences(name, Context.MODE_PRIVATE);
 		editor = sp.edit();
-
 	}
 
-	public SPUtil() {
-		sp = PreferenceManager.getDefaultSharedPreferences(MyApp.context);
+	public SPUtil(Context context) {
+		sp = PreferenceManager.getDefaultSharedPreferences(context);
 		editor = sp.edit();
 	}
 
 	public boolean isAllowNotification() {
-		return sp.getBoolean(NOTIFICATION, true);
-	}
-
-	public void setNotification(boolean flag) {
-		editor.putBoolean(NOTIFICATION, flag);
-		editor.commit();
+		return sp.getBoolean(Constant.NOTIFICATION, true);
 	}
 
 	public boolean isAllowSound() {
-		return sp.getBoolean(SOUND, true);
-	}
-
-	public void setSound(boolean flag) {
-		editor.putBoolean(SOUND, flag);
-		editor.commit();
+		return sp.getBoolean(Constant.SOUND, true);
 	}
 
 	public boolean isAllowVibrate() {
-		return sp.getBoolean(VIBRATE, true);
+		return sp.getBoolean(Constant.VIBRATE, true);
 	}
 
-	public void setVibrate(boolean flag) {
-		editor.putBoolean(VIBRATE, flag);
+	public void setNotification(boolean flag) {
+		editor.putBoolean(Constant.NOTIFICATION, flag);
 		editor.commit();
 	}
 
+	public void setSound(boolean flag) {
+		editor.putBoolean(Constant.SOUND, flag);
+		editor.commit();
+	}
+
+	public void setVibrate(boolean flag) {
+		editor.putBoolean(Constant.VIBRATE, flag);
+		editor.commit();
+	}
 }

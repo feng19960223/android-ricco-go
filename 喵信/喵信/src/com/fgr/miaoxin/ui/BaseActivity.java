@@ -122,7 +122,7 @@ public abstract class BaseActivity extends FragmentActivity {
 		TextView tv = (TextView) headerView
 				.findViewById(R.id.tv_headerview_title);
 		switch (position) {
-		case Constant.LEFT:
+		case Constant.START:
 			tv.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 			break;
 		case Constant.CENTER:
@@ -142,14 +142,14 @@ public abstract class BaseActivity extends FragmentActivity {
 
 	public void setHeaderTitle(String title, Position position) {
 		switch (position) {
-		case LEFT:
-			setHeaderTitle(title, Constant.LEFT);
+		case START:
+			setHeaderTitle(title, Constant.START);
 			break;
 		case CENTER:
 			setHeaderTitle(title, Constant.CENTER);
 			break;
-		case RIGHT:
-			setHeaderTitle(title, Constant.RIGHT);
+		case END:
+			setHeaderTitle(title, Constant.END);
 			break;
 		}
 	}
@@ -171,7 +171,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
 		ImageView imageView;
 
-		if (pos == Position.LEFT) {
+		if (pos == Position.START) {
 			imageView = (ImageView) headerView
 					.findViewById(R.id.iv_headerview_left);
 		} else {

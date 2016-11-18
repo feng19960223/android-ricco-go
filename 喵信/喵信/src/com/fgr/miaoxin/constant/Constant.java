@@ -12,4 +12,8 @@ public class Constant {
 
 	public static boolean DEBUG = true;
 	public static final String TAG = "TAG";
+
+	public static final String NOTIFICATION = "notification";
+	public static final String SOUND = "sound";
+	public static final String VIBRATE = "vibrate";
 }

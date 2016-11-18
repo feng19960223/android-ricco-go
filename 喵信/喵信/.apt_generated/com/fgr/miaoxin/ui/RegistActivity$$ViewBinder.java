@@ -8,10 +8,10 @@ import butterknife.ButterKnife.ViewBinder;
 public class RegistActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RegistActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165220, "field 'rgGender'");
-    target.rgGender = finder.castView(view, 2131165220, "field 'rgGender'");
-    view = finder.findRequiredView(source, 2131165217, "field 'etUsername' and method 'recover'");
-    target.etUsername = finder.castView(view, 2131165217, "field 'etUsername'");
+    view = finder.findRequiredView(source, 2131165223, "field 'etRePassword'");
+    target.etRePassword = finder.castView(view, 2131165223, "field 'etRePassword'");
+    view = finder.findRequiredView(source, 2131165221, "field 'etUsername' and method 'recover'");
+    target.etUsername = finder.castView(view, 2131165221, "field 'etUsername'");
     ((android.widget.TextView) view).addTextChangedListener(
       new android.text.TextWatcher() {
         @Override public void onTextChanged(
@@ -36,8 +36,8 @@ public class RegistActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RegistActiv
           
         }
       });
-    view = finder.findRequiredView(source, 2131165223, "field 'btnRegist' and method 'regist'");
-    target.btnRegist = finder.castView(view, 2131165223, "field 'btnRegist'");
+    view = finder.findRequiredView(source, 2131165227, "field 'btnRegist' and method 'regist'");
+    target.btnRegist = finder.castView(view, 2131165227, "field 'btnRegist'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -46,17 +46,17 @@ public class RegistActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RegistActiv
           target.regist(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131165218, "field 'etPassword'");
-    target.etPassword = finder.castView(view, 2131165218, "field 'etPassword'");
-    view = finder.findRequiredView(source, 2131165219, "field 'etRePassword'");
-    target.etRePassword = finder.castView(view, 2131165219, "field 'etRePassword'");
+    view = finder.findRequiredView(source, 2131165224, "field 'rgGender'");
+    target.rgGender = finder.castView(view, 2131165224, "field 'rgGender'");
+    view = finder.findRequiredView(source, 2131165222, "field 'etPassword'");
+    target.etPassword = finder.castView(view, 2131165222, "field 'etPassword'");
   }
 
   @Override public void unbind(T target) {
-    target.rgGender = null;
+    target.etRePassword = null;
     target.etUsername = null;
     target.btnRegist = null;
+    target.rgGender = null;
     target.etPassword = null;
-    target.etRePassword = null;
   }
 }

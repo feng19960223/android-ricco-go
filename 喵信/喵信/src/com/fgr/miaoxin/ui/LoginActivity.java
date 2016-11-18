@@ -43,7 +43,7 @@ public class LoginActivity extends BaseActivity {
 
 	private void initHeaderView() {
 		setHeaderTitle("ª∂”≠ π”√");
-		setHeaderImage(Position.LEFT, R.drawable.ic_launcher, false, null);
+		setHeaderImage(Position.START, R.drawable.ic_launcher, false, null);
 	}
 
 	@OnClick(R.id.tv_login_regist)

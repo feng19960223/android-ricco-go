@@ -130,6 +130,14 @@
             android:name="com.fgr.miaoxin.ui.RegistActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.fgr.miaoxin.ui.RobotActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.fgr.miaoxin.ui.AddFriendActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

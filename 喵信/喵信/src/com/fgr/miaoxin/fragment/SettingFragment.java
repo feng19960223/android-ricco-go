@@ -1,5 +1,7 @@
 package com.fgr.miaoxin.fragment;
 
+import java.lang.reflect.Method;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +17,16 @@ import com.fgr.miaoxin.constant.Constant.Position;
 import com.fgr.miaoxin.util.SPUtil;
 
 public class SettingFragment extends BaseFragment {
+	private static final String NOTIFICATION = "notification";
+	private static final String SOUND = "sound";
+	private static final String VIBRATE = "vibrate";
+
+	private static final int SWITCH_ON = 0;
+	private static final int SWITCH_OFF = 1;
+
 	@Bind(R.id.tv_setting_username)
 	TextView tvUsername;
+
 	@Bind(R.id.tv_setting_notification)
 	TextView tvNotification;
 	@Bind(R.id.tv_setting_sound)
@@ -25,11 +35,11 @@ public class SettingFragment extends BaseFragment {
 	TextView tvVibrate;
 
 	@Bind(R.id.iv_setting_editornotification)
-	ImageView ivEditorNotification;
+	ImageView ivNotification;
 	@Bind(R.id.iv_setting_editorsound)
-	ImageView ivEditorSound;
+	ImageView ivSound;
 	@Bind(R.id.iv_setting_editorvibrate)
-	ImageView ivEditorVibrate;
+	ImageView ivVibrate;
 
 	SPUtil sputil;
 
@@ -50,7 +60,8 @@ public class SettingFragment extends BaseFragment {
 	@Override
 	public void init() {
 		super.init();
-		sputil = new SPUtil(bmobUserManager.getCurrentUserObjectId());
+		sputil = new SPUtil(getActivity(),
+				bmobUserManager.getCurrentUserObjectId());
 		initHeaderView();
 		initView();
 	}
@@ -60,90 +71,125 @@ public class SettingFragment extends BaseFragment {
 	}
 
 	private void initView() {
+		// 当前登录用户的用户名
 		tvUsername.setText(bmobUserManager.getCurrentUserName());
+		// 根据当前登录用户的偏好设置文件设置TextView和ImageView的显示
 		if (sputil.isAllowNotification()) {
-			tvNotification.setText("接收通知");
-			ivEditorNotification.setImageResource(R.drawable.ic_switch_on);
+			switcher(NOTIFICATION, SWITCH_ON);
+			ivSound.setClickable(true);
+			ivVibrate.setClickable(true);
 		} else {
-			tvNotification.setText("拒绝通知");
-			ivEditorNotification.setImageResource(R.drawable.ic_switch_off);
-			ivEditorSound.setClickable(false);
-			ivEditorVibrate.setClickable(false);
+			switcher(NOTIFICATION, SWITCH_OFF);
+			ivSound.setClickable(false);
+			ivVibrate.setClickable(false);
 		}
+
 		if (sputil.isAllowSound()) {
-			tvSound.setText("允许声音");
-			ivEditorSound.setImageResource(R.drawable.ic_switch_on);
+			switcher(SOUND, SWITCH_ON);
 		} else {
-			tvSound.setText("禁止声音");
-			ivEditorSound.setImageResource(R.drawable.ic_switch_off);
+			switcher(SOUND, SWITCH_OFF);
 		}
 		if (sputil.isAllowVibrate()) {
-			tvVibrate.setText("允许振动");
-			ivEditorVibrate.setImageResource(R.drawable.ic_switch_on);
+			switcher(VIBRATE, SWITCH_ON);
 		} else {
-			tvVibrate.setText("禁止振动");
-			ivEditorVibrate.setImageResource(R.drawable.ic_switch_off);
+			switcher(VIBRATE, SWITCH_OFF);
 		}
 
 	}
 
 	@OnClick(R.id.iv_setting_editornotification)
-	public void setNotification(View v) {
+	public void setNotification(View view) {
 		if (!sputil.isAllowNotification()) {
-			sputil.setNotification(true);
-
-			tvNotification.setText("接收通知");
-			ivEditorNotification.setImageResource(R.drawable.ic_switch_on);
-
-			ivEditorSound.setClickable(true);
-			ivEditorVibrate.setClickable(true);
-
+			switcher(NOTIFICATION, SWITCH_ON);
+			ivSound.setClickable(true);
+			ivVibrate.setClickable(true);
 		} else {
-			sputil.setNotification(false);
+			switcher(NOTIFICATION, SWITCH_OFF);
+			ivSound.setClickable(false);
+			ivVibrate.setClickable(false);
 
-			tvNotification.setText("拒绝通知");
-			ivEditorNotification.setImageResource(R.drawable.ic_switch_off);
+			switcher(SOUND, SWITCH_OFF);
 
-			tvSound.setText("禁止声音");
-			ivEditorSound.setImageResource(R.drawable.ic_switch_off);
-			ivEditorSound.setClickable(false);
-			sputil.setSound(false);
+			switcher(VIBRATE, SWITCH_OFF);
 
-			tvVibrate.setText("禁止振动");
-			ivEditorVibrate.setImageResource(R.drawable.ic_switch_off);
-			ivEditorVibrate.setClickable(false);
-			sputil.setVibrate(false);
 		}
 	}
 
 	@OnClick(R.id.iv_setting_editorsound)
-	public void setSound(View v) {
+	public void setSound(View view) {
 		if (!sputil.isAllowSound()) {
-			sputil.setSound(true);
-			tvSound.setText("允许声音");
-			ivEditorSound.setImageResource(R.drawable.ic_switch_on);
+			switcher(SOUND, SWITCH_ON);
 		} else {
-			sputil.setSound(false);
-			tvSound.setText("禁止声音");
-			ivEditorSound.setImageResource(R.drawable.ic_switch_off);
+			switcher(SOUND, SWITCH_OFF);
 		}
 	}
 
 	@OnClick(R.id.iv_setting_editorvibrate)
-	public void setVibrate(View v) {
+	public void setVibrate(View view) {
 		if (!sputil.isAllowVibrate()) {
-			sputil.setVibrate(true);
-			tvVibrate.setText("允许振动");
-			ivEditorVibrate.setImageResource(R.drawable.ic_switch_on);
+			switcher(VIBRATE, SWITCH_ON);
 		} else {
-			sputil.setVibrate(false);
-			tvVibrate.setText("禁止振动");
-			ivEditorVibrate.setImageResource(R.drawable.ic_switch_off);
+			switcher(VIBRATE, SWITCH_OFF);
 		}
 	}
 
 	@OnClick(R.id.btn_setting_logout)
 	public void logout(View v) {
 		MyApp.logout();
+	}
+
+	/**
+	 * 反射</br> 设定ImageView中的图片 TextView中的文本 偏好设置
+	 * 
+	 * @param name
+	 *            NOTIFICATION SOUND VIBRATE
+	 * @param state
+	 *            SWITCH_ON SWITCH_OFF
+	 */
+	private void switcher(String name, int state) {
+		try {
+			// "notification"
+			// ImageView对应的id
+			String ivResName = "iv_setting_editor" + name;
+			int ivResId = getResources().getIdentifier(ivResName, "id",
+					getActivity().getPackageName());
+
+			// TextView对应的id
+			String tvResName = "tv_setting_" + name;
+			int tvResId = getResources().getIdentifier(tvResName, "id",
+					getActivity().getPackageName());
+
+			if (ivResId == 0 || tvResId == 0) {
+				throw new RuntimeException("未能找到正确的视图");
+			}
+
+			ImageView iv = (ImageView) getView().findViewById(ivResId);
+
+			if (state == SWITCH_ON) {
+				iv.setImageResource(R.drawable.ic_switch_on);
+			} else {
+				iv.setImageResource(R.drawable.ic_switch_off);
+			}
+
+			TextView tv = (TextView) getView().findViewById(tvResId);
+
+			tv.setText((state == SWITCH_ON ? "允许" : "禁止")
+					+ (NOTIFICATION.equals(name) ? "通知"
+							: (SOUND.equals(name) ? "声音" : "振动")));
+
+			// 调用sputil中的方法来设定偏好设置文件
+			// "notification"--->"setNotification"
+			char[] chars = name.toCharArray();
+			chars[0] -= 32;
+			String methodName = "set" + new String(chars);
+
+			Method method = sputil.getClass().getDeclaredMethod(methodName,
+					boolean.class); // boolean.class或Boolean.TYPE把上面改为boolean,Boolean.class把上面的该为Boolean
+
+			method.invoke(sputil, state == SWITCH_ON ? true : false);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
