@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.fgr.miaoxin.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -113,11 +116,30 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
 		return this.datasource;
 	}
 
+	/**
+	 * 设置图片
+	 * 
+	 * @param url
+	 * @param iv
+	 */
 	public void setAvatar(String url, ImageView iv) {
 		if (TextUtils.isEmpty(url)) {
 			iv.setImageResource(R.drawable.ic_launcher);
 		} else {
 			ImageLoader.getInstance().displayImage(url, iv);
 		}
+	}
+
+	// 自定义的字体
+	Typeface Fonts;
+
+	public void stetFontType(Context context, TextView textView) {
+		if (Fonts == null) {
+			AssetManager manager = context.getAssets();
+			String path = "fonts/customfont.ttf";// 自定义的字体
+			Fonts = Typeface.createFromAsset(manager, path);
+		}
+		// 将字体应用到控件上
+		textView.setTypeface(Fonts);
 	}
 }

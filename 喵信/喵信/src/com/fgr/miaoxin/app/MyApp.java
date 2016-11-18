@@ -24,6 +24,10 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class MyApp extends Application {
+	// 有两个地方绝对不能使用MyApp.context
+	// 1.界面跳转时,构建Intent最后不要使用context
+	// 如果一定要使用时,一定要提供Intent.FLAG_ACTIVITY_NEW_TASK
+	// 2.AlertDialog弹窗时,不能context充当上下文对象
 	public static MyApp context;// 上下文
 	public static MediaPlayer mediaPlayer;// 音效
 	public static BmobGeoPoint lastPoint;// 可以存储在Bmob服务器上的位置(定位),在SplashActivity初始化

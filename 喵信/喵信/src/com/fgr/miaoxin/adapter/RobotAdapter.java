@@ -3,7 +3,6 @@ package com.fgr.miaoxin.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +34,8 @@ public class RobotAdapter extends MyBaseAdapter<MyRobot> {
 						parent, false);
 			}
 			viewHolder = new ViewHolder(convertView);
-			// TODO 设置聊天字体
-			// SMSManager.stetFontType(context, viewHolder.textView_body);
+			// 设置聊天字体
+			stetFontType(context, viewHolder.tvContent);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();

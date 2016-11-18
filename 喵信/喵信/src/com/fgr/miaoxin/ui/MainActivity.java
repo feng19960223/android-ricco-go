@@ -1,17 +1,25 @@
 package com.fgr.miaoxin.ui;
 
-import android.os.Bundle;
+import android.content.DialogInterface;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.widget.ImageView;
 import butterknife.Bind;
 import butterknife.OnClick;
+import cn.bmob.im.bean.BmobInvitation;
+import cn.bmob.im.bean.BmobMsg;
+import cn.bmob.im.inteface.EventListener;
 
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.adapter.MyPagerAdapter;
+import com.fgr.miaoxin.app.MyApp;
+import com.fgr.miaoxin.receiver.MyPushMessageReceiver;
+import com.fgr.miaoxin.util.DialogUtil;
+import com.fgr.miaoxin.util.SPUtil;
 import com.fgr.miaoxin.view.MyTabIcon;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements EventListener {
 
 	@Bind(R.id.vp_main_viewpager)
 	ViewPager viewPager;
@@ -19,19 +27,19 @@ public class MainActivity extends BaseActivity {
 
 	@Bind(R.id.mti_main_message)
 	MyTabIcon mtiMessage;
+
 	@Bind(R.id.mti_main_friend)
 	MyTabIcon mtiFriend;
+	@Bind(R.id.iv_main_newinvitation)
+	ImageView ivNewInvitation;
+
 	@Bind(R.id.mti_main_find)
 	MyTabIcon mtiFind;
 	@Bind(R.id.mti_main_setting)
 	MyTabIcon mtiSetting;
 
 	MyTabIcon[] tabIcons;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+	SPUtil sputil;
 
 	@Override
 	public void setMyContentView() {
@@ -41,6 +49,7 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void init() {
 		super.init();
+		sputil = new SPUtil(this, bmobUserManager.getCurrentUserObjectId());
 		initViewPager();
 		initView();
 	}
@@ -92,6 +101,27 @@ public class MainActivity extends BaseActivity {
 		});
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// MainActivity成为MyReceiver订阅者队列中的一员
+		MyPushMessageReceiver.regist(this);
+
+		// 更加当前登录用户所对应数据库中是否有未处理的
+		// "添加好友申请"来决定ivNewInvitation是否可见
+		if (bmobDB.hasNewInvite()) {
+			ivNewInvitation.setVisibility(View.VISIBLE);
+		} else {
+			ivNewInvitation.setVisibility(View.INVISIBLE);
+		}
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MyPushMessageReceiver.unRegist(this);
+	}
+
 	@OnClick({ R.id.mti_main_message, R.id.mti_main_friend, R.id.mti_main_find,
 			R.id.mti_main_setting })
 	public void setCurrentFragment(View v) {
@@ -109,6 +139,44 @@ public class MainActivity extends BaseActivity {
 			viewPager.setCurrentItem(3, false);
 			break;
 		}
+	}
+
+	@Override
+	public void onMessage(BmobMsg message) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onReaded(String conversionId, String msgTime) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onNetChange(boolean isNetConnected) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onAddUser(BmobInvitation message) {
+		// 当收到了“添加好友申请”时，该方法会被MyReceiver调用
+		ivNewInvitation.setVisibility(View.VISIBLE);
+		if (sputil.isAllowSound())
+			MyApp.mediaPlayer.start();
+	}
+
+	@Override
+	public void onOffline() {
+		// 当收到下线通知时，该方法会被MyReceiver调用
+		DialogUtil.showDialog(this, "下线通知", "检测到您的账号在另一台设备登录，请您重新登录！", false,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						MyApp.logout();
+					}
+				});
 	}
 
 }

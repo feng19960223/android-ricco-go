@@ -46,17 +46,17 @@ public class RegistActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RegistActiv
           target.regist(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131165224, "field 'rgGender'");
-    target.rgGender = finder.castView(view, 2131165224, "field 'rgGender'");
     view = finder.findRequiredView(source, 2131165222, "field 'etPassword'");
     target.etPassword = finder.castView(view, 2131165222, "field 'etPassword'");
+    view = finder.findRequiredView(source, 2131165224, "field 'rgGender'");
+    target.rgGender = finder.castView(view, 2131165224, "field 'rgGender'");
   }
 
   @Override public void unbind(T target) {
     target.etRePassword = null;
     target.etUsername = null;
     target.btnRegist = null;
-    target.rgGender = null;
     target.etPassword = null;
+    target.rgGender = null;
   }
 }

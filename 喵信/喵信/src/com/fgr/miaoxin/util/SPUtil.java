@@ -19,8 +19,8 @@ public class SPUtil {
 
 	public static final String NOTIFICATION = "notification";
 
-	public SPUtil(Context context, String name) {
-		sp = context.getSharedPreferences(name, Context.MODE_PRIVATE);
+	public SPUtil(Context context, String filename) {
+		sp = context.getSharedPreferences(filename, Context.MODE_PRIVATE);
 		editor = sp.edit();
 	}
 

@@ -38,8 +38,8 @@ public class AddFriendActivity extends BaseActivity {
 
 	List<BmobChatUser> friendList;// 当前登录用户的所有列表
 
-	// 模糊查询时每页最多呈现的数据量
-	private static final int PAGE_LIMIT = 10;
+	// 模糊查询时每页最多呈现的数据量//“一页”查询几个用户
+	private static final int PAGE_LIMIT = 20;// 大一点比较好,最终返回的时候,会去掉已经是好友的
 	int page;// 模糊查询时的页码
 
 	@Override
@@ -86,14 +86,19 @@ public class AddFriendActivity extends BaseActivity {
 
 								ptrListView.onRefreshComplete();
 
-								if (datas.size() > 0) {
-									adapter.addItems(datas, false);
-								} else {
-									toast("没有更多用户了");
+								if (datas == null) {
+									toast("没有更多数据了");
 									ptrListView.setMode(Mode.DISABLED);
+								} else if (datas.size() == 0) {
+									page += 1;
+									queryUserByPage(page, etUsername.getText()
+											.toString(), this);
+								} else {
+									adapter.addItems(datas, false);
 								}
 							}
 						});
+
 			}
 		});
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -102,6 +107,7 @@ public class AddFriendActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				toast("点击了" + adapter.getItem(position - 1).getUsername());
+				// TODO 查看详细信息
 			}
 		});
 	}
@@ -204,7 +210,17 @@ public class AddFriendActivity extends BaseActivity {
 				});
 	}
 
-	private void queryUserByPage(final int page, final String username,
+	/**
+	 * 分页查询 查询_user表中，用户名包含username的用户
+	 * 
+	 * @param page
+	 *            页码
+	 * @param username
+	 *            要查询被包含的用户名
+	 * @param listener
+	 *            处理查询返回结果
+	 */
+	private void queryUserByPage(int page, final String username,
 			final OnDatasLoadFinishListener<BmobChatUser> listener) {
 		BmobQuery<BmobChatUser> query = new BmobQuery<BmobChatUser>();
 		// 设定查询条件
@@ -247,6 +263,7 @@ public class AddFriendActivity extends BaseActivity {
 				} else {
 					listener.onLoadFinish(null);
 				}
+
 			}
 		});
 	}

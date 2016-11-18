@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.adapter.RobotAdapter;
 import com.fgr.miaoxin.bean.MyRobot;
+import com.fgr.miaoxin.constant.Constant;
 import com.fgr.miaoxin.constant.Constant.Position;
 import com.fgr.miaoxin.util.LogUtil;
 
@@ -39,8 +40,8 @@ public class RobotActivity extends BaseActivity {
 	@Bind(R.id.et_robot_content)
 	EditText etContent;
 
-	private String[] hello = { "再下已经恭候多时了!喵", "哆啦B梦永远要陪着你!", "哆啦B梦,知道这世界上的一切",
-			"哆啦B梦感应到了,你需要我", "输入内容,我将给你答案,高数作业除外", "最强大脑已经启动,随时可以出发",
+	private String[] hello = { "再下已经恭候多时了!喵", "哆啦B喵永远要陪着你!", "哆啦B喵,知道这世界上的一切",
+			"哆啦B喵感应到了,你需要我", "输入内容,我将给你答案,高数作业除外", "最强大脑已经启动,随时可以出发",
 			"好久不见,甚是想念!喵", "有什么可以帮助你的吗?", "天气、星座、笑话...我全可以,要女朋友干什么?" };
 	RequestQueue queque;
 
@@ -110,8 +111,8 @@ public class RobotActivity extends BaseActivity {
 	}
 
 	public void loaddata(String info) {
-		String url = "http://www.tuling123.com/openapi/api?key=fdb4cb1a9303446dba1be5dfdf95e9f7&info="
-				+ info;
+		String url = "http://www.tuling123.com/openapi/api?key="
+				+ Constant.TULING_KEY + "&info=" + info;
 		StringRequest request = new StringRequest(url, new Listener<String>() {
 			@Override
 			public void onResponse(String response) {
@@ -125,7 +126,6 @@ public class RobotActivity extends BaseActivity {
 					e.printStackTrace();
 				}
 			}
-
 		}, new ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {

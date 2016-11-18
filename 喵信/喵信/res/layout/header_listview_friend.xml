@@ -75,7 +75,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
-            android:text="哆啦B梦"
+            android:text="哆啦B喵"
             android:textSize="18sp" />
     </LinearLayout>
 

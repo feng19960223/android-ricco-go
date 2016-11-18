@@ -2,6 +2,7 @@ package com.fgr.miaoxin.ui;
 
 import java.util.Locale;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
@@ -38,6 +39,11 @@ public abstract class BaseActivity extends FragmentActivity {
 	// BmobIMSDK提供的一个工具类
 	// 用来“管理”聊天内容（聊天内容的创建、发送、删除、存储）
 	BmobChatManager bmobChatManager;
+	// BmobIMSDK使用Sqlite数据库作为本地缓存
+	// 策略是建立很多个数据库每个数据库有固定的四张数据表
+	// 只要当前设备上有一个用户登录，就为该用户创建一个数据库，
+	// 数据库的名字是该登录用户的objectId
+	// 该数据库就是缓存当前设备的当前登录用户的所有相关数据
 	// BmobIMSDK提供的一个工具类
 	// 用来“管理”本地数据库
 	BmobDB bmobDB;
@@ -52,6 +58,9 @@ public abstract class BaseActivity extends FragmentActivity {
 		WindowUtil.translucent(getWindow());
 		bmobUserManager = BmobUserManager.getInstance(MyApp.context);
 		bmobChatManager = BmobChatManager.getInstance(MyApp.context);
+		// 创建或打开当前设备上当前登录用户所对应的数据库(数据库的名字是当前登录用户的objectId)
+		// 如果没有处于登录状态的用户，则创建或打开默认的数据库（数据库的名字是bmobchat.db）
+		// 另外一种创建数据库的方式：BmobDB.create(context,toId)是创建或打开toId名字的对应数据库
 		bmobDB = BmobDB.create(MyApp.context);
 		toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 		MyApp.activities.add(this);

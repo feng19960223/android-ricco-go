@@ -78,11 +78,9 @@ public class FriendFragment extends BaseFragment {
 	private void initListView() {
 		users = new ArrayList<MyUser>();
 		adapter = new FriendAdapter(getActivity(), users);
-
-		if (header != null) {
+		if (header != null) {// 4->2会有问题,所以使用这种
 			listView.removeHeaderView(header);
 		}
-
 		header = baseActivity.getLayoutInflater().inflate(
 				R.layout.header_listview_friend, listView, false);
 		listView.addHeaderView(header);
@@ -136,6 +134,7 @@ public class FriendFragment extends BaseFragment {
 				return true;
 			}
 		});
+
 	}
 
 	private void initView() {
