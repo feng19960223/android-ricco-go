@@ -3,6 +3,7 @@ package com.fgr.miaoxin.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -106,8 +107,15 @@ public class AddFriendActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				toast("点击了" + adapter.getItem(position - 1).getUsername());
-				// TODO 查看详细信息
+				// 查看详细信息
+				// 按钮设置这个属性:android:focusable="false",不然没有办法跳转
+				// Android官方认为,如果你在ListView有一个按钮,那么你的跳转应该是由按钮来实现的...
+				Intent intent = new Intent(AddFriendActivity.this,
+						UserInfoActivity.class);
+				intent.putExtra("from", "stranger");
+				intent.putExtra("name", adapter.getItem(position - 1)
+						.getUsername());
+				jumpTo(intent, false);
 			}
 		});
 	}

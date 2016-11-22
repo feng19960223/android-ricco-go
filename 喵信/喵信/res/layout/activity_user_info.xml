@@ -1,0 +1,187 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myapp="http://schemas.android.com/apk/res/com.fgr.miaoxin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/headerview"
+        layout="@layout/headerview_layout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp" >
+
+        <com.fgr.miaoxin.view.XCRoundImageView
+            android:id="@+id/iv_userinfo_avatar"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/iv_userinfo_avatareditor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_userinfo_avatar"
+            android:layout_toRightOf="@+id/iv_userinfo_avatar"
+            android:src="@drawable/ic_info_edit_pencil"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="昵称"
+            android:textSize="16sp" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_userinfo_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/ll_userinfo_editnicknamecontainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:visibility="invisible" >
+
+                <EditText
+                    android:id="@+id/et_userinfo_nickname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/ib_userinfo_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/btn_blue_selector"
+                    android:src="@drawable/ic_cpb_action_accept" />
+
+                <ImageButton
+                    android:id="@+id/ib_userinfo_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_red_selector"
+                    android:src="@drawable/ic_cpb_action_cancel" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_userinfo_nicknameeditor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_info_edit_pencil"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="用户名"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_userinfo_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="性别"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_userinfo_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <com.dd.CircularProgressButton
+        android:id="@+id/btn_userinfo_update"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        myapp:cpb_iconComplete="@drawable/ic_cpb_action_accept"
+        myapp:cpb_iconError="@drawable/ic_cpb_action_cancel"
+        myapp:cpb_textIdle="更新资料" />
+
+    <Button
+        android:id="@+id/btn_userinfo_chat"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_blue_selector"
+        android:text="开始聊天"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn_userinfo_black"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/btn_red_selector"
+        android:text="关小黑屋"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="invisible" />
+
+</LinearLayout>

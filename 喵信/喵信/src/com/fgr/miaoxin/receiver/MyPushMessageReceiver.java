@@ -24,6 +24,7 @@ import cn.bmob.v3.listener.FindListener;
 
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.app.MyApp;
+import com.fgr.miaoxin.constant.Constant;
 import com.fgr.miaoxin.ui.MainActivity;
 import com.fgr.miaoxin.util.SPUtil;
 
@@ -125,6 +126,11 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
 								// 5. 要更新回执信息在BmobMsg数据表中isReaded字段值(从0更新为1)
 								BmobMsg.createAndSaveRecentAfterAgree(context,
 										message);
+								// 发送一个通知,及时刷新好友列表(FriendFragment--ListView)
+								// 以及刷新会话列表(MessageFragment--ListView)
+								// 刷新MainActivity的总未读消息个数
+								Intent intent2 = new Intent(Constant.ADD_FRIEND);
+								context.sendBroadcast(intent2);
 							}
 						}
 

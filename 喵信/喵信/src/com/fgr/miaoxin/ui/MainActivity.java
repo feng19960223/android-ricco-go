@@ -1,6 +1,10 @@
 package com.fgr.miaoxin.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
@@ -14,11 +18,19 @@ import cn.bmob.im.inteface.EventListener;
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.adapter.MyPagerAdapter;
 import com.fgr.miaoxin.app.MyApp;
+import com.fgr.miaoxin.constant.Constant;
+import com.fgr.miaoxin.fragment.FriendFragment;
+import com.fgr.miaoxin.fragment.MessageFragment;
 import com.fgr.miaoxin.receiver.MyPushMessageReceiver;
 import com.fgr.miaoxin.util.DialogUtil;
 import com.fgr.miaoxin.util.SPUtil;
+import com.fgr.miaoxin.view.BadgeView;
 import com.fgr.miaoxin.view.MyTabIcon;
 
+/**
+ * @author anzhuo
+ *
+ */
 public class MainActivity extends BaseActivity implements EventListener {
 
 	@Bind(R.id.vp_main_viewpager)
@@ -40,6 +52,11 @@ public class MainActivity extends BaseActivity implements EventListener {
 
 	MyTabIcon[] tabIcons;
 	SPUtil sputil;
+
+	@Bind(R.id.bv_main_unreadmsgcount)
+	BadgeView bvCount;
+
+	AddFriendReceiver receiver;
 
 	@Override
 	public void setMyContentView() {
@@ -107,6 +124,11 @@ public class MainActivity extends BaseActivity implements EventListener {
 		// MainActivity成为MyReceiver订阅者队列中的一员
 		MyPushMessageReceiver.regist(this);
 
+		receiver = new AddFriendReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constant.ADD_FRIEND);
+		registerReceiver(receiver, filter);
+
 		// 更加当前登录用户所对应数据库中是否有未处理的
 		// "添加好友申请"来决定ivNewInvitation是否可见
 		if (bmobDB.hasNewInvite()) {
@@ -114,12 +136,14 @@ public class MainActivity extends BaseActivity implements EventListener {
 		} else {
 			ivNewInvitation.setVisibility(View.INVISIBLE);
 		}
+		setBadgeCount();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 		MyPushMessageReceiver.unRegist(this);
+		unregisterReceiver(receiver);
 	}
 
 	@OnClick({ R.id.mti_main_message, R.id.mti_main_friend, R.id.mti_main_find,
@@ -139,6 +163,14 @@ public class MainActivity extends BaseActivity implements EventListener {
 			viewPager.setCurrentItem(3, false);
 			break;
 		}
+	}
+
+	/**
+	 * 用来显示所有未读消息数量
+	 */
+	public void setBadgeCount() {
+		int count = bmobDB.getAllUnReadCount();
+		bvCount.setBadgeCount(count);
 	}
 
 	@Override
@@ -177,6 +209,36 @@ public class MainActivity extends BaseActivity implements EventListener {
 						MyApp.logout();
 					}
 				});
+	}
+
+	/**
+	 * 当FriendFragment删除好友时 应该刷新MessageFragment的ListView 应该刷新MainActivity未读消息的数量
+	 */
+	public void refreshMessageFragment() {
+		// 刷新MessageFragment的ListView
+		MessageFragment messageFragment = (MessageFragment) adapter.getItem(0);
+		messageFragment.refresh();
+		// 刷新MainActivity未读消息的数量
+		setBadgeCount();
+
+	}
+
+	public class AddFriendReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// 刷新好友列表(FriendFragment--ListView)
+			// 以及刷新会话列表(MessageFragment--ListView)
+			// 刷新MainActivity的总未读消息个数
+			String action = intent.getAction();
+			if (Constant.ADD_FRIEND.equals(action)) {
+				FriendFragment friendFragment = (FriendFragment) adapter
+						.getItem(1);
+				friendFragment.refresh();
+				refreshMessageFragment();
+			}
+
+		}
+
 	}
 
 }

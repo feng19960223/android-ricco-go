@@ -2,6 +2,7 @@ package com.fgr.miaoxin.fragment;
 
 import java.lang.reflect.Method;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import butterknife.OnClick;
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.app.MyApp;
 import com.fgr.miaoxin.constant.Constant.Position;
+import com.fgr.miaoxin.ui.UserInfoActivity;
 import com.fgr.miaoxin.util.SPUtil;
 
 public class SettingFragment extends BaseFragment {
@@ -95,6 +97,13 @@ public class SettingFragment extends BaseFragment {
 			switcher(VIBRATE, SWITCH_OFF);
 		}
 
+	}
+
+	@OnClick(R.id.iv_setting_editorusername)
+	public void setUserInfo(View view) {
+		Intent intent = new Intent(getActivity(), UserInfoActivity.class);
+		intent.putExtra("from", "me");
+		jumpTo(intent, false);
 	}
 
 	@OnClick(R.id.iv_setting_editornotification)

@@ -6,23 +6,33 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.Bind;
 import cn.bmob.im.bean.BmobChatUser;
+import cn.bmob.v3.listener.UpdateListener;
 
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.adapter.FriendAdapter;
 import com.fgr.miaoxin.bean.MyUser;
 import com.fgr.miaoxin.constant.Constant.Position;
 import com.fgr.miaoxin.ui.AddFriendActivity;
+import com.fgr.miaoxin.ui.MainActivity;
+import com.fgr.miaoxin.ui.NearFriendActivity;
 import com.fgr.miaoxin.ui.NewFriendActivity;
 import com.fgr.miaoxin.ui.RobotActivity;
+import com.fgr.miaoxin.ui.UserInfoActivity;
+import com.fgr.miaoxin.util.DialogUtil;
 import com.fgr.miaoxin.util.PinYinUtil;
 import com.fgr.miaoxin.view.MyLetterView;
 import com.fgr.miaoxin.view.MyLetterView.OnTouchLetterListener;
@@ -102,7 +112,7 @@ public class FriendFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				jumpTo(AddFriendActivity.class, false);
+				jumpTo(NearFriendActivity.class, false);
 			}
 		});
 		TextView tvRobot = (TextView) header.findViewById(R.id.tv_header_robot);
@@ -113,6 +123,72 @@ public class FriendFragment extends BaseFragment {
 			}
 		});
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				Intent intent = new Intent(getActivity(),
+						UserInfoActivity.class);
+				intent.putExtra("from", "friend");
+				// ListView有一个header
+				String username = adapter.getItem(position - 1).getUsername();
+				intent.putExtra("username", username);
+				jumpTo(intent, false);
+
+			}
+		});
+
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				final MyUser user = adapter.getItem(position - 1);
+
+				DialogUtil.showDialog(getActivity(), "删除好友",
+						"确认要删除" + user.getUsername() + "吗？", true,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// 1)从服务器端（更新当前登录用户的contacts字段值,将user去除掉）
+								// 和本地数据库的friend表中（将user这条数据记录删除掉）解除好友关系
+								// 2)删除聊天记录
+								// chat表中把两人之间所有的聊天记录全部删除
+								// recent表中把两人之间的会话记录删除
+								bmobUserManager.deleteContact(
+										user.getObjectId(),
+										new UpdateListener() {
+
+											@Override
+											public void onSuccess() {
+												// 3)从FriendFragment显示好友的ListView数据源中删除
+												adapter.removeData(user);
+												// 4)调用MainActivity的refreshMessageFragment方法
+												// 刷新MessageFragment的ListView以及MainActivity的角标
+												((MainActivity) getActivity())
+														.refreshMessageFragment();
+											}
+
+											@Override
+											public void onFailure(int arg0,
+													String arg1) {
+												toastAndLog("删除好于失败", arg0,
+														arg1);
+											}
+										});
+
+							}
+
+						});
+
+				return true;
+			}
+		});
 
 	}
 

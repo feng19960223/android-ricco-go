@@ -19,4 +19,6 @@ public class Constant {
 	public static final String SOUND = "sound";
 	public static final String VIBRATE = "vibrate";
 
+	public static final String ADD_FRIEND = "com.fgr.miaoxin.constant.ADD_FRIEND";
+
 }
