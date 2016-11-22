@@ -13,11 +13,14 @@ import android.util.Log;
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.BmobNotifyManager;
 import cn.bmob.im.BmobUserManager;
+import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.bean.BmobInvitation;
+import cn.bmob.im.bean.BmobMsg;
 import cn.bmob.im.inteface.EventListener;
 import cn.bmob.im.util.BmobJsonUtil;
 import cn.bmob.push.PushConstants;
 import cn.bmob.v3.BmobInstallation;
+import cn.bmob.v3.listener.FindListener;
 
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.app.MyApp;
@@ -64,12 +67,77 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
 							handleAddFriendInvitation(context, message, tid);
 						}
 					}
+					if ("agree".equals(tag)) {
+						// 收到一个同意好友的回执
+						String tid = BmobJsonUtil.getString(jsonObject, "tId");
+						if (tid != null) {
+							addFriend(context, message, tid);
+						}
+					}
 				}
 
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private void addFriend(final Context context, final String message,
+			final String tid) {
+
+		try {
+			final String targetName = BmobJsonUtil.getString(new JSONObject(
+					message), "fu");
+			// 1. 根据targetName在服务器_user表中查找对应的用户
+			// 2. 如果确实存在该用户，则当前登录用户在_user表中所对应的数据记录的contacts字段值，完成两人好友关系建立
+			// 3. 在当前登录用户所对应本地数据库frineds表中添加好友信息
+			// 4. 调用自己的监听器的回调方法
+
+			BmobUserManager.getInstance(context).addContactAfterAgree(
+					targetName, new FindListener<BmobChatUser>() {
+
+						@Override
+						public void onSuccess(List<BmobChatUser> arg0) {
+							// 判断该回执的接收人是不是当前设备的登录用户
+							String uid = BmobUserManager.getInstance(context)
+									.getCurrentUserObjectId();
+							if (tid.equals(uid)) {
+								// 如果是，则要通知当前登录用户
+								// 订阅者对收到了一个同意好友添加的回执事情并不感兴趣(并没有订阅这个事情)
+								// 所以要通知当前登录用户只能由MyReceiver发送通知
+								if (sputil.isAllowNotification()) {
+									BmobNotifyManager.getInstance(context)
+											.showNotify(sputil.isAllowSound(),
+													sputil.isAllowVibrate(),
+													R.drawable.ic_notification,
+													targetName + "同意了您添加好友的申请",
+													"同意添加好友",
+													targetName + "同意了您添加好友的申请",
+													MainActivity.class);
+								}
+
+								// 1. 根据收到的json字符串创建了一个BmobMsg对象
+								// 2. 将1.所创建出来的BmobMsg对象，作为两个人之间的一条聊天记录，保存到
+								// 本地数据库的chat表中
+								// 3.
+								// 根据1.所创建出来的BmobMsg对象，提取部分属性构建了一个BmobRecent对象
+								// 4. 将3.所创建的BmobRecent对象保存到了本地数据库的Recent数据表中
+								// 5. 要更新回执信息在BmobMsg数据表中isReaded字段值(从0更新为1)
+								BmobMsg.createAndSaveRecentAfterAgree(context,
+										message);
+							}
+						}
+
+						@Override
+						public void onError(int arg0, String arg1) {
+							// TODO Auto-generated method stub
+
+						}
+					});
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	// 添加好友申请

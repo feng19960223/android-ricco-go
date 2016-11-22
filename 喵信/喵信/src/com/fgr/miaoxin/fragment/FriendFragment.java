@@ -11,18 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.Bind;
+import cn.bmob.im.bean.BmobChatUser;
 
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.adapter.FriendAdapter;
 import com.fgr.miaoxin.bean.MyUser;
 import com.fgr.miaoxin.constant.Constant.Position;
 import com.fgr.miaoxin.ui.AddFriendActivity;
+import com.fgr.miaoxin.ui.NewFriendActivity;
 import com.fgr.miaoxin.ui.RobotActivity;
 import com.fgr.miaoxin.util.PinYinUtil;
 import com.fgr.miaoxin.view.MyLetterView;
@@ -91,7 +90,9 @@ public class FriendFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				jumpTo(AddFriendActivity.class, false);
+				// TODO
+				// 点击跳转到NewFriendActivity显示收到的“添加好友申请”
+				jumpTo(NewFriendActivity.class, false);
 			}
 		});
 
@@ -101,8 +102,7 @@ public class FriendFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO
-				toast("--2-->");
+				jumpTo(AddFriendActivity.class, false);
 			}
 		});
 		TextView tvRobot = (TextView) header.findViewById(R.id.tv_header_robot);
@@ -113,27 +113,6 @@ public class FriendFragment extends BaseFragment {
 			}
 		});
 		listView.setAdapter(adapter);
-
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO
-				toast("--短-->" + adapter.getItem(position - 1).getUsername());
-			}
-		});
-
-		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO
-				toast("<--长--" + adapter.getItem(position - 1).getUsername());
-				return true;
-			}
-		});
 
 	}
 
@@ -168,7 +147,13 @@ public class FriendFragment extends BaseFragment {
 	public void refresh() {
 		// 创建假的好友数据
 		// TODO
-		List<MyUser> list = createFakeFriends();
+		// List<MyUser> list = createFakeFriends();
+
+		List<BmobChatUser> contacts = bmobDB.getAllContactList();
+
+		// 根据List<BmobChatUser>获得一个List<MyUser>
+
+		List<MyUser> list = getMyUserList(contacts);
 
 		Collections.sort(list, new Comparator<MyUser>() {
 			@Override
@@ -199,10 +184,38 @@ public class FriendFragment extends BaseFragment {
 				}
 			}
 		});
+		// 将排序好的数据放到ListView中呈现
 		adapter.addItems(list, true);
 	}
 
+	/**
+	 * 根据List<BmobChatUser>获得一个List<MyUser>
+	 * 
+	 * @param contacts
+	 * @return
+	 */
+
+	private List<MyUser> getMyUserList(List<BmobChatUser> contacts) {
+		List<MyUser> list = new ArrayList<MyUser>();
+
+		for (BmobChatUser bcu : contacts) {
+			MyUser mu = new MyUser();
+			mu.setAvatar(bcu.getAvatar());
+			mu.setUsername(bcu.getUsername());
+			mu.setPyName(PinYinUtil.getPinYin(bcu.getUsername()));
+			mu.setLetter(PinYinUtil.getFirstLetter(bcu.getUsername()));
+			// 为了删除好友时，必须提供objectId
+			mu.setObjectId(bcu.getObjectId());
+
+			list.add(mu);
+		}
+
+		return list;
+	}
+
 	private List<MyUser> createFakeFriends() {
+		// 创建假的好友数据
+		// TODO
 		List<MyUser> list = new ArrayList<MyUser>();
 
 		MyUser mu = null;

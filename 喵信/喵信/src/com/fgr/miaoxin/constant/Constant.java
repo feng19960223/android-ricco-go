@@ -18,4 +18,5 @@ public class Constant {
 	public static final String NOTIFICATION = "notification";
 	public static final String SOUND = "sound";
 	public static final String VIBRATE = "vibrate";
+
 }
