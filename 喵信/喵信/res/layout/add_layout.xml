@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:weightSum="4"
+    >
+
+    <TextView
+        android:id="@+id/tv_add_picture"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/btn_chat_add_picture_selector"
+        android:gravity="center"
+        android:text="图片"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_add_photo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/btn_chat_add_camera_selector"
+        android:gravity="center"
+        android:text="拍照"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_add_location"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/btn_chat_add_location_selector"
+        android:gravity="center"
+        android:text="位置"
+        android:textSize="16sp" />
+
+</LinearLayout>

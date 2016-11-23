@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -42,7 +43,8 @@ public class RobotActivity extends BaseActivity {
 
 	private String[] hello = { "再下已经恭候多时了!喵", "哆啦B喵永远要陪着你!", "哆啦B喵,知道这世界上的一切",
 			"哆啦B喵感应到了,你需要我", "输入内容,我将给你答案,高数作业除外", "最强大脑已经启动,随时可以出发",
-			"好久不见,甚是想念!喵", "有什么可以帮助你的吗?", "天气、星座、笑话...我全可以,要女朋友干什么?" };
+			"好久不见,甚是想念!喵", "有什么可以帮助你的吗?", "天气、星座、笑话...我全可以,要女朋友干什么?",
+			"想我了吗?喵~~" };
 	RequestQueue queque;
 
 	@Override
@@ -85,8 +87,14 @@ public class RobotActivity extends BaseActivity {
 	@OnClick(R.id.btn_robot_send)
 	public void send(View v) {
 		String content = etContent.getText().toString();
+		if (TextUtils.isEmpty(content)) {
+			return;
+		}
+		etContent.setText("");
 		adapter.addItem(new MyRobot(content, MyRobot.SEND, getTime()));
-		if (robots.size() > 30) {// 保存30条记录,保存聊天记录,写TXT文件......
+		if (robots.size() > 30) {
+			// TODO 保存30条记录,保存聊天记录,写TXT文件......
+			// TODO 巨大BUG,只能删除对方的,自己的删除不了
 			for (int i = 0; i < robots.size(); i++) {
 				robots.remove(i);
 			}
@@ -99,12 +107,13 @@ public class RobotActivity extends BaseActivity {
 	@SuppressLint("SimpleDateFormat")
 	private String getTime() {// 连续聊天,5秒显示一次时间
 		currentTime = System.currentTimeMillis();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 		Date curDate = new Date();
 		String str = format.format(curDate);
-		if (currentTime - oldTime >= 1000 * 60) {
+		if (currentTime - oldTime >= 1000 * 3) {
 			oldTime = currentTime;
 			return str;
+
 		} else {
 			return "";
 		}

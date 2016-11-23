@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp" >
+
+        <ImageView
+            android:id="@+id/iv_item_blog_avatar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/edit_input_bg"
+            android:padding="3dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_item_blog_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:text="abc"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_item_blog_cotnent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="ASFDSAFASDFDAASFDSAFASDFDAASFDSAFASDFDAASFDSAFASDFDAASFDSAFASDFDAASFDSAFASDFDAASFDSAFASDFDASFADSFDASFDASF"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_item_blog_imagecontainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp" >
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <TextView
+            android:id="@+id/tv_item_blog_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="昨天 15：43" />
+
+        <TextView
+            android:id="@+id/tv_item_blog_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_share"
+            android:gravity="center_vertical"
+            android:text="分享" />
+
+        <TextView
+            android:id="@+id/tv_item_blog_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_love"
+            android:gravity="center_vertical"
+            android:text="0赞" />
+
+        <TextView
+            android:id="@+id/tv_item_blog_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_comment"
+            android:gravity="center_vertical"
+            android:text="评论" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_item_blog_commentcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#663e3e3e"
+        android:orientation="vertical" >
+        
+    </LinearLayout>
+
+</LinearLayout>

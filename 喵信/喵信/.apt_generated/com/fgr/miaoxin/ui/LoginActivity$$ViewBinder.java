@@ -8,8 +8,8 @@ import butterknife.ButterKnife.ViewBinder;
 public class LoginActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.LoginActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165212, "field 'btnLogin' and method 'login'");
-    target.btnLogin = finder.castView(view, 2131165212, "field 'btnLogin'");
+    view = finder.findRequiredView(source, 2131165227, "field 'btnLogin' and method 'login'");
+    target.btnLogin = finder.castView(view, 2131165227, "field 'btnLogin'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -18,8 +18,8 @@ public class LoginActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.LoginActivit
           target.login(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131165211, "field 'etPassword' and method 'recover1'");
-    target.etPassword = finder.castView(view, 2131165211, "field 'etPassword'");
+    view = finder.findRequiredView(source, 2131165226, "field 'etPassword' and method 'recover1'");
+    target.etPassword = finder.castView(view, 2131165226, "field 'etPassword'");
     ((android.widget.TextView) view).addTextChangedListener(
       new android.text.TextWatcher() {
         @Override public void onTextChanged(
@@ -44,8 +44,8 @@ public class LoginActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.LoginActivit
           
         }
       });
-    view = finder.findRequiredView(source, 2131165210, "field 'etUsername' and method 'recover2'");
-    target.etUsername = finder.castView(view, 2131165210, "field 'etUsername'");
+    view = finder.findRequiredView(source, 2131165225, "field 'etUsername' and method 'recover2'");
+    target.etUsername = finder.castView(view, 2131165225, "field 'etUsername'");
     ((android.widget.TextView) view).addTextChangedListener(
       new android.text.TextWatcher() {
         @Override public void onTextChanged(
@@ -70,7 +70,7 @@ public class LoginActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.LoginActivit
           
         }
       });
-    view = finder.findRequiredView(source, 2131165213, "method 'regist'");
+    view = finder.findRequiredView(source, 2131165228, "method 'regist'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(

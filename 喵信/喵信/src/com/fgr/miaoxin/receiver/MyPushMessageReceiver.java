@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.BmobNotifyManager;
 import cn.bmob.im.BmobUserManager;
@@ -17,15 +16,16 @@ import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.bean.BmobInvitation;
 import cn.bmob.im.bean.BmobMsg;
 import cn.bmob.im.inteface.EventListener;
+import cn.bmob.im.inteface.OnReceiveListener;
 import cn.bmob.im.util.BmobJsonUtil;
 import cn.bmob.push.PushConstants;
-import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.listener.FindListener;
 
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.app.MyApp;
 import com.fgr.miaoxin.constant.Constant;
 import com.fgr.miaoxin.ui.MainActivity;
+import com.fgr.miaoxin.util.LogUtil;
 import com.fgr.miaoxin.util.SPUtil;
 
 public class MyPushMessageReceiver extends BroadcastReceiver {
@@ -34,53 +34,147 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		if (intent.getAction().equals(PushConstants.ACTION_MESSAGE)) {
-
-			String message = intent
-					.getStringExtra(PushConstants.EXTRA_PUSH_MESSAGE_STRING);
-			Log.d("TAG", BmobInstallation.getInstallationId(context) + "收到的内容："
-					+ message);
+		String action = intent.getAction();
+		if (PushConstants.ACTION_MESSAGE.equals(action)) {
 			try {
-				JSONObject jsonObject = new JSONObject(message);
-				if (jsonObject.has("tag")) {
-					String tag = jsonObject.getString("tag");
-					if ("offline".equals(tag)) {
-						// 如果tag的值为offline
-						// 当前设备的登录用户的帐号,已经在另外一台设备上登录
-						// 让当前设备的用户下线
-						// 订阅者
-						if (list.size() > 0) {
-							// MyPushMessageReceiver通过调用订阅这的offline方法告知订阅者
-							// 再有订阅这具体处理,让当前登录用户下线
-							for (EventListener eventListener : list) {
-								eventListener.onOffline();
-							}
-						} else {
-							// 自行处理让用户下线
-							MyApp.logout();
+				String message = intent
+						.getStringExtra(PushConstants.EXTRA_PUSH_MESSAGE_STRING);
+				LogUtil.d("TAG", "MyReceiver收到的内容：" + message);
+				// {"tag":"offline"}
+				JSONObject jsonobj = new JSONObject(message);
+				String tag = jsonobj.getString("tag");
+				if ("offline".equals(tag)) {
+					// 当前设备上处于登录状态的用户在其它设备上登录了
+					// 应该让当前设备上处于登录状态的用户下线
+					if (list.size() > 0) {
+						for (EventListener listener : list) {
+							// MyReceiver通过调用订阅者的onOffline方法
+							// 告诉订阅者收到了下线通知，请订阅者来处理
+							listener.onOffline();
 						}
+					} else {
+						// 如果没有订阅者，则MyReceiver自行处理下线通知
+						// 使当前设备登录用户下线
+						MyApp.logout();
 					}
-					if ("add".equals(tag)) {
-						// 收到了一个添加好友的申请
-						// 判断添加好友申请是否是发给当前登录用户的
-						String tid = BmobJsonUtil.getString(jsonObject, "tId");
-						if (tid != null) {
-							handleAddFriendInvitation(context, message, tid);
-						}
+
+				}
+
+				if ("add".equals(tag)) {
+					// 判断添加好友申请是否是发给当前登录用户的
+					String tid = BmobJsonUtil.getString(
+							new JSONObject(message), "tId");
+					if (tid != null) {
+						handleAddFriend(context, message, tid);
 					}
-					if ("agree".equals(tag)) {
-						// 收到一个同意好友的回执
-						String tid = BmobJsonUtil.getString(jsonObject, "tId");
-						if (tid != null) {
-							addFriend(context, message, tid);
-						}
+				}
+
+				if ("agree".equals(tag)) {
+					// 对方通过了我之前发送的好友申请
+					String tid = BmobJsonUtil.getString(
+							new JSONObject(message), "tId");
+					if (tid != null) {
+						addFriend(context, message, tid);
 					}
+				}
+
+				if ("".equals(tag)) {
+					// 收到了对方发送的一个聊天消息
+					String tid = BmobJsonUtil.getString(
+							new JSONObject(message), "tId");
+					if (tid != null) {
+						saveMsg(context, message, tid);
+					}
+
 				}
 
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
+
 		}
+	}
+
+	private void saveMsg(final Context context, String message, final String tid) {
+
+		// 将Json字符串格式的聊天消息保存到本地数据库中
+
+		// 1. 根据收到的json字符串创建JSonObject对象，并判断消息的发送方是否是当前登录用户的好友
+		// 2. 根据JsonObject对象创建BmobMsg对象，BmobMsg对象的isreaded属性值为2，status属性值为3
+		// 3. 根据当前设备是否有登录用户，以及如果有登录用户是否是消息的接收方来做出不同的处理
+		// 只有在当前登录用户是消息接收方的情况下，才会保存BmobMsg对象后调用咱们传入的监听器中的相应方法
+		// 其余情况仅保存BmobMsg对象
+		// 4. 如果当前登录用户是消息的接收方，在保存前还会判断下，该消息是否曾经保存过
+		// 5. 保存BmobMsg对象时，是向消息的接收方所对应的数据库的chat表和recent表中保存
+		// 6. BmobMsg对象保存完毕，向消息的放送放发送一个回执，tag属性值为readed
+		// 7. 回执发送完毕后，会更新接收到的聊天消息在BmobMsg数据表中保存的数据记录的isreaded字段值从0--->1
+		// 8. 调用咱们自己写的监听器
+		// 注意：只有当前设备登录用户与消息接收方是同一人时，自己写的监听器才会被调用
+		// 调用时间是在BmobMsg对象保存完毕之后执行，它有可能在第6,7步执行之前就被执行
+
+		BmobChatManager.getInstance(context).createReceiveMsg(message,
+				new OnReceiveListener() {
+
+					@Override
+					public void onSuccess(BmobMsg msg) {
+						// 保存聊天消息成功，参数就是根据Json字符串所获得的BmobMsg对象
+						// 如果聊天消息是发送给当前登录用户的话
+						// 则通知当前登录用户
+						String uid = BmobUserManager.getInstance(context)
+								.getCurrentUserObjectId();
+						if (tid.equals(uid)) {
+							if (list.size() > 0) {
+								for (EventListener listener : list) {
+									listener.onMessage(msg);
+								}
+							} else {
+								if (sputil.isAllowNotification()) {
+									String ticker = "";
+									switch (msg.getMsgType()) {
+									case 1:
+										ticker = msg.getBelongUsername() + "说："
+												+ msg.getContent();
+										break;
+									case 2:
+										ticker = msg.getBelongUsername()
+												+ "发送了一个：[图片]";
+										break;
+									case 3:
+										ticker = msg.getBelongUsername()
+												+ "发送了一个： [位置]";
+										break;
+									case 4:
+										ticker = msg.getBelongUsername()
+												+ "发送了一个：[语音]";
+										break;
+									default:
+										throw new RuntimeException("错误的消息类型");
+									}
+									BmobNotifyManager.getInstance(context)
+											.showNotify(sputil.isAllowSound(),
+													sputil.isAllowVibrate(),
+													R.drawable.ic_notification,
+													ticker, "聊天内容", ticker,
+													MainActivity.class);
+								}
+							}
+						}
+					}
+
+					@Override
+					public void onFailure(int code, String arg1) {
+						switch (code) {
+						case 1002:
+							LogUtil.d("一秒钟之内收到了来自同一用户的多条聊天信息");
+							break;
+
+						default:
+							LogUtil.d("保存聊天消失时出现错误，错误编码：" + code + "," + arg1);
+							break;
+						}
+					}
+				});
+
 	}
 
 	private void addFriend(final Context context, final String message,
@@ -147,8 +241,7 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
 	}
 
 	// 添加好友申请
-	private void handleAddFriendInvitation(Context context, String message,
-			String tid) {
+	private void handleAddFriend(Context context, String message, String tid) {
 		// 将收到的Json字符串格式的添加好友申请保存本地数据库的数据表中
 		// step1. 根据收到的Json字符串创建BmobInvitation实体类对象，该对象一个重要的属性值status为2。
 		// status为2意味着收到了一条添加好友申请但尚未处理

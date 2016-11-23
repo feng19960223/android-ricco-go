@@ -2,7 +2,7 @@ package com.fgr.miaoxin.ui;
 
 import java.util.Locale;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
@@ -30,6 +30,7 @@ import com.fgr.miaoxin.constant.Constant;
 import com.fgr.miaoxin.constant.Constant.Position;
 import com.fgr.miaoxin.util.WindowUtil;
 
+@SuppressLint({ "ShowToast", "RtlHardcoded" })
 public abstract class BaseActivity extends FragmentActivity {
 
 	// 公共属性
@@ -75,7 +76,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	}
 
 	/**
-	 * 由子类选择性重写
+	 * 由子类选择性重写 </br>初始化数据
 	 */
 	public void init() {
 		// NO_OP “钩子方法”

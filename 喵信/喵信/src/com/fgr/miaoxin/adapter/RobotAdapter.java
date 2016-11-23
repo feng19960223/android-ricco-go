@@ -26,12 +26,12 @@ public class RobotAdapter extends MyBaseAdapter<MyRobot> {
 		int type = getItemViewType(position);
 		if (convertView == null) {
 			if (type == 0) {// 接收
-				convertView = layoutInflater.inflate(R.layout.item_robot_left,
-						parent, false);
+				convertView = layoutInflater.inflate(
+						R.layout.item_chat_text_left, parent, false);
 			}
 			if (type == 1) {// 发送
-				convertView = layoutInflater.inflate(R.layout.item_robot_right,
-						parent, false);
+				convertView = layoutInflater.inflate(
+						R.layout.item_chat_text_right, parent, false);
 			}
 			viewHolder = new ViewHolder(convertView);
 			// 设置聊天字体
@@ -50,7 +50,10 @@ public class RobotAdapter extends MyBaseAdapter<MyRobot> {
 		}
 		if (robot.getFlag() == 2) {
 			// 自己的头像
+
 			// TODO
+			// msg.getBelongAvatar()
+			// setAvatar("", viewHolder.ivAvatar);
 		}
 		return convertView;
 	}
@@ -70,11 +73,11 @@ public class RobotAdapter extends MyBaseAdapter<MyRobot> {
 	}
 
 	public class ViewHolder {
-		@Bind(R.id.iv_item_robot_avatar)
+		@Bind(R.id.iv_item_chat_avatar)
 		XCRoundImageView ivAvatar;
-		@Bind(R.id.tv_item_robot_content)
+		@Bind(R.id.tv_item_chat_content)
 		TextView tvContent;
-		@Bind(R.id.tv_item_robot_time)
+		@Bind(R.id.tv_item_chat_time)
 		TextView tvTime;
 
 		public ViewHolder(View convertView) {

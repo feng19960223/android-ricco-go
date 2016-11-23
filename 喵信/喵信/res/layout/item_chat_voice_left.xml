@@ -5,11 +5,10 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/tv_item_robot_time"
+        android:id="@+id/tv_item_chat_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="3dp"
         android:padding="@dimen/usual_padding"
         android:text="15:30"
         android:textSize="16sp" />
@@ -21,22 +20,30 @@
         android:paddingTop="10dp" >
 
         <com.fgr.miaoxin.view.XCRoundImageView
-            android:id="@+id/iv_item_robot_avatar"
+            android:id="@+id/iv_item_chat_avatar"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_launcher" />
 
-        <TextView
-            android:id="@+id/tv_item_robot_content"
+        <ImageView
+            android:id="@+id/iv_item_chat_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/iv_item_robot_avatar"
-            android:layout_marginRight="50dp"
-            android:layout_toRightOf="@+id/iv_item_robot_avatar"
+            android:layout_alignTop="@+id/iv_item_chat_avatar"
+            android:layout_toRightOf="@+id/iv_item_chat_avatar"
             android:background="@drawable/chatfrom_bg_normal"
             android:gravity="center_vertical"
-            android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+            android:src="@drawable/voice_right3" />
+
+        <TextView
+            android:id="@+id/tv_item_chat_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/iv_item_chat_image"
+            android:text="2&apos;" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -5,11 +5,10 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/tv_item_robot_time"
+        android:id="@+id/tv_item_chat_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="3dp"
         android:padding="@dimen/usual_padding"
         android:text="15:30"
         android:textSize="16sp" />
@@ -21,19 +20,19 @@
         android:paddingTop="10dp" >
 
         <com.fgr.miaoxin.view.XCRoundImageView
-            android:id="@+id/iv_item_robot_avatar"
+            android:id="@+id/iv_item_chat_avatar"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_launcher" />
 
         <TextView
-            android:id="@+id/tv_item_robot_content"
+            android:id="@+id/tv_item_chat_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/iv_item_robot_avatar"
+            android:layout_alignTop="@+id/iv_item_chat_avatar"
             android:layout_marginLeft="50dp"
-            android:layout_toLeftOf="@+id/iv_item_robot_avatar"
+            android:layout_toLeftOf="@+id/iv_item_chat_avatar"
             android:background="@drawable/chatto_bg_normal"
             android:gravity="center_vertical"
             android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" />

@@ -25,6 +25,7 @@ import com.fgr.miaoxin.constant.Constant.Position;
 import com.fgr.miaoxin.ui.ChatActivity;
 import com.fgr.miaoxin.ui.MainActivity;
 import com.fgr.miaoxin.util.DialogUtil;
+import com.fgr.miaoxin.util.LogUtil;
 
 public class MessageFragment extends BaseFragment {
 	@Bind(R.id.lv_message_listview)
@@ -86,6 +87,7 @@ public class MessageFragment extends BaseFragment {
 							@Override
 							public void onSuccess(List<BmobChatUser> arg0) {
 								BmobChatUser user = arg0.get(0);
+								LogUtil.i("user" + user);
 								Intent intent = new Intent(getActivity(),
 										ChatActivity.class);
 								intent.putExtra("user", user);

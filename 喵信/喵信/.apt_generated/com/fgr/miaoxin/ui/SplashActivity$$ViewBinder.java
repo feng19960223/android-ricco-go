@@ -8,10 +8,10 @@ import butterknife.ButterKnife.ViewBinder;
 public class SplashActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.SplashActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165234, "field 'tvMiao'");
-    target.tvMiao = finder.castView(view, 2131165234, "field 'tvMiao'");
-    view = finder.findRequiredView(source, 2131165235, "field 'tvXin'");
-    target.tvXin = finder.castView(view, 2131165235, "field 'tvXin'");
+    view = finder.findRequiredView(source, 2131165249, "field 'tvMiao'");
+    target.tvMiao = finder.castView(view, 2131165249, "field 'tvMiao'");
+    view = finder.findRequiredView(source, 2131165250, "field 'tvXin'");
+    target.tvXin = finder.castView(view, 2131165250, "field 'tvXin'");
   }
 
   @Override public void unbind(T target) {

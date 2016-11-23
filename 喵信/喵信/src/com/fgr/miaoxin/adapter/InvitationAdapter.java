@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.util.DialogUtil;
-import com.fgr.miaoxin.util.LogUtil;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -26,7 +26,6 @@ public class InvitationAdapter extends MyBaseAdapter<BmobInvitation> {
 
 	public InvitationAdapter(Context context, List<BmobInvitation> datasource) {
 		super(context, datasource);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -56,21 +55,20 @@ public class InvitationAdapter extends MyBaseAdapter<BmobInvitation> {
 
 			@Override
 			public void onClick(View v) {
-				// TODO 同意添加好友
-				// 1)去_user表中on个查找发送该“添加好友申请”的用户
-				// 2)如果找到了该用户，就去更新当前登录用户在_user表中
-				// 对应的数据记录的contacts字段的值，在服务器端将第1步
-				// 查找到的用户添加为好友
-				// 3)更新本地数据库中保存的“添加好友申请”数据记录status字段的值
-				// 从2更新为1，意味着该添加好友申请已经为处理过了
-				// 4)向第1步查找到的用户发送一个“回执”消息，这个消息的tag为agree
-				// 5)将第1步查找到的用户添加到本地数据库的friends数据表
-				// 6)回调咱们自己写的监听器中的方法
+				// 同意添加好友
+				// 1. 根据“添加好友申请”发送者的username，在服务器的_user表中查询，确认确是有该用户
+				// 2. 更新当前登录用户在_user表中的内容，更新contacts字段值，将“添加好友申请”发送者作为当前登录用户的好友
+				// 3.
+				// 更新当前登录用户所对应的本地数据库中tab_new_contacts数据表中username所发送的所有添加好友申请数据记录的status值，从初始的2更新为数字1
+				// 4. 当前登录用户向“添加好友申请”发送者的设备推送一条消息，该消息的tag值为"agree"
+				// 5. 向当前登录用户所对应的本地数据中friends表中插入一条数据记录
+				// 6. 回调咱们自己写的监听器中的回调方法
 				BmobUserManager.getInstance(context).agreeAddContact(
 						invitation, new UpdateListener() {
 
 							@Override
 							public void onSuccess() {
+								// 添加好友完毕
 								vh.ibAgree.setVisibility(View.INVISIBLE);
 								vh.ibReject.setVisibility(View.INVISIBLE);
 								vh.tvAdd.setVisibility(View.VISIBLE);
@@ -79,11 +77,13 @@ public class InvitationAdapter extends MyBaseAdapter<BmobInvitation> {
 
 							@Override
 							public void onFailure(int arg0, String arg1) {
-								LogUtil.e("TAG", "添加好友失败," + arg0 + ":" + arg1);
-								Toast.makeText(context, "添加好友失败",
+								Toast.makeText(context, "添加好友失败，请稍后重试",
 										Toast.LENGTH_SHORT).show();
+								Log.d("TAG", "添加好友失败，错误代码：" + arg0 + "," + arg1);
+
 							}
 						});
+
 			}
 		});
 
