@@ -90,6 +90,7 @@ public class EmoUtil {
 		Matcher matcher = pattern.matcher(ss);
 		while (matcher.find()) {
 			String resName = matcher.group();// ue056
+			// resName--->resId
 			int resId = MyApp.context.getResources().getIdentifier(resName,
 					"drawable", MyApp.context.getPackageName());
 			if (resId != 0) {

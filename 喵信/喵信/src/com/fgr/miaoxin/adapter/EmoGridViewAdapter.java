@@ -19,6 +19,7 @@ public class EmoGridViewAdapter extends MyBaseAdapter<String> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+
 		ViewHolder vh;
 
 		if (convertView == null) {
@@ -29,12 +30,14 @@ public class EmoGridViewAdapter extends MyBaseAdapter<String> {
 		} else {
 			vh = (ViewHolder) convertView.getTag();
 		}
-		// ue056
-		String name = getItem(position);
-		// ue056--->R.drawable.ue056
-		int resId = context.getResources().getIdentifier(name, "drawable",
+
+		String resName = getItem(position);// ue058
+		// resName---->resId
+		int resId = context.getResources().getIdentifier(resName, "drawable",
 				context.getPackageName());
+
 		vh.ivEmo.setImageResource(resId);
+
 		return convertView;
 	}
 
@@ -45,6 +48,7 @@ public class EmoGridViewAdapter extends MyBaseAdapter<String> {
 		public ViewHolder(View convertView) {
 			ButterKnife.bind(this, convertView);
 		}
+
 	}
 
 }

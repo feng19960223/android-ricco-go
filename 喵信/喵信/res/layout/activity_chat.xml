@@ -151,7 +151,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_chat_morecontainer"
+        android:id="@+id/ll_chat_morelayoutcontainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >

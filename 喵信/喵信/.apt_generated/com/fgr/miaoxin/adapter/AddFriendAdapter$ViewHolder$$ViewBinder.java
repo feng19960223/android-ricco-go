@@ -10,18 +10,18 @@ public class AddFriendAdapter$ViewHolder$$ViewBinder<T extends com.fgr.miaoxin.a
     View view;
     view = finder.findRequiredView(source, 2131165301, "field 'tvAdd'");
     target.tvAdd = finder.castView(view, 2131165301, "field 'tvAdd'");
-    view = finder.findRequiredView(source, 2131165298, "field 'ivAvatar'");
-    target.ivAvatar = finder.castView(view, 2131165298, "field 'ivAvatar'");
-    view = finder.findRequiredView(source, 2131165299, "field 'tvUsername'");
-    target.tvUsername = finder.castView(view, 2131165299, "field 'tvUsername'");
     view = finder.findRequiredView(source, 2131165300, "field 'btnAdd'");
     target.btnAdd = finder.castView(view, 2131165300, "field 'btnAdd'");
+    view = finder.findRequiredView(source, 2131165299, "field 'tvUsername'");
+    target.tvUsername = finder.castView(view, 2131165299, "field 'tvUsername'");
+    view = finder.findRequiredView(source, 2131165298, "field 'ivAvatar'");
+    target.ivAvatar = finder.castView(view, 2131165298, "field 'ivAvatar'");
   }
 
   @Override public void unbind(T target) {
     target.tvAdd = null;
-    target.ivAvatar = null;
-    target.tvUsername = null;
     target.btnAdd = null;
+    target.tvUsername = null;
+    target.ivAvatar = null;
   }
 }

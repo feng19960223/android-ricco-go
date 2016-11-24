@@ -20,7 +20,9 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.BmobUserManager;
+import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.db.BmobDB;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 import com.fgr.miaoxin.R;
@@ -200,6 +202,11 @@ public abstract class BaseActivity extends FragmentActivity {
 		}
 	}
 
+	// 手动为headerView属性赋值的方法
+	public void setHeaderView(View headerView) {
+		this.headerView = headerView;
+	}
+
 	// 输出吐丝和打印log相关方法
 	public void toast(String text) {
 		if (!TextUtils.isEmpty(text)) {
@@ -213,13 +220,13 @@ public abstract class BaseActivity extends FragmentActivity {
 			Log.d(Constant.TAG, getClass().getSimpleName() + "输出的日志：" + log);
 	}
 
+	public void log(String log, int error, String msg) {
+		log(log + ",错误代码：" + error + ": " + msg);
+	}
+
 	public void toastAndLog(String text, String log) {
 		toast(text);
 		log(log);
-	}
-
-	public void log(String log, int error, String msg) {
-		log(log + ",错误代码：" + error + ": " + msg);
 	}
 
 	public void toastAndLog(String text, int error, String msg) {
@@ -281,8 +288,20 @@ public abstract class BaseActivity extends FragmentActivity {
 		}
 	}
 
-	// 手动为headerView属性赋值的方法
-	public void setHeaderView(View headerView) {
-		this.headerView = headerView;
+	/**
+	 * 获取当前登录用户的所有好友
+	 * 
+	 * @param callback
+	 */
+	public void getMyFriends(FindListener<BmobChatUser> callback) {
+		// 1. 清空本地数据库friends数据表中的内容
+		bmobDB.deleteAllContact();
+		// 2. 从服务器上获取最新的当前登录用户好友列表
+		// 3. 把好友列表写入本地数据库friends表
+		bmobUserManager.queryCurrentContactList(callback);
+		// 4. 做后续的操作(比如界面跳转)
+		// 写到callback的相应回调方法中即可
+
 	}
+
 }

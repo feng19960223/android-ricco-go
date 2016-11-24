@@ -1,5 +1,7 @@
 package com.fgr.miaoxin.ui;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.v3.datatype.BmobGeoPoint;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 import com.baidu.location.BDLocation;
@@ -150,12 +153,35 @@ public class SplashActivity extends BaseActivity {
 						@Override
 						public void onSuccess() {
 							jumpTo(MainActivity.class, true);
+
+							getMyFriends(new FindListener<BmobChatUser>() {
+
+								@Override
+								public void onError(int arg0, String arg1) {
+									switch (arg0) {
+									case 1000:
+										// 当前登录用户一个好友都没有
+										jumpTo(MainActivity.class, true);
+										break;
+									default:
+										toastAndLog("获取当前登录用户好友列表失败", arg0,
+												arg1);
+										break;
+									}
+								}
+
+								@Override
+								public void onSuccess(List<BmobChatUser> arg0) {
+									jumpTo(MainActivity.class, true);
+								}
+							});
 						}
 
 						@Override
 						public void onFailure(int arg0, String arg1) {
 							switch (arg0) {
 							case 206:// 更新位置失败
+								// 设备的登录用户已经在其它设备上登录了
 								MyApp.logout();
 								break;
 							default:

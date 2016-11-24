@@ -1,5 +1,7 @@
 package com.fgr.miaoxin.ui;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -9,6 +11,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import cn.bmob.im.bean.BmobChatUser;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -97,7 +100,26 @@ public class LoginActivity extends BaseActivity {
 				updateUserLocation(new UpdateListener() {
 					@Override
 					public void onSuccess() {
-						jumpTo(MainActivity.class, true);
+						getMyFriends(new FindListener<BmobChatUser>() {
+
+							@Override
+							public void onError(int arg0, String arg1) {
+								switch (arg0) {
+								case 1000:
+									jumpTo(MainActivity.class, true);
+									break;
+
+								default:
+									toastAndLog("查询当前登录用户喵友列表失败", arg0, arg1);
+									break;
+								}
+							}
+
+							@Override
+							public void onSuccess(List<BmobChatUser> arg0) {
+								jumpTo(MainActivity.class, true);
+							}
+						});
 					}
 
 					@Override
@@ -109,12 +131,12 @@ public class LoginActivity extends BaseActivity {
 
 			@Override
 			public void onFailure(int arg0, String arg1) {
+				btnLogin.setProgress(-1);
 				switch (arg0) {
 				case 101:
 					toast("用户名或密码错误");
 					break;
 				default:
-					btnLogin.setProgress(-1);
 					toastAndLog("登录失败,稍后重试", arg0, arg1);
 					break;
 				}

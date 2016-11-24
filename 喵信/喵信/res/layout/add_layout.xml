@@ -2,39 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dp"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="5dp"
-    android:weightSum="4"
-    >
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp" >
 
     <TextView
-        android:id="@+id/tv_add_picture"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
+        android:id="@+id/tv_addlayout_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:drawablePadding="@dimen/usual_padding"
         android:drawableTop="@drawable/btn_chat_add_picture_selector"
         android:gravity="center"
-        android:text="图片"
+        android:text="照片"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tv_add_photo"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
+        android:id="@+id/tv_addlayout_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:drawablePadding="@dimen/usual_padding"
         android:drawableTop="@drawable/btn_chat_add_camera_selector"
         android:gravity="center"
-        android:text="拍照"
+        android:text="拍摄"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tv_add_location"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
+        android:id="@+id/tv_addlayout_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/usual_padding"
         android:drawableTop="@drawable/btn_chat_add_location_selector"
         android:gravity="center"
         android:text="位置"

@@ -10,15 +10,15 @@ public class FriendFragment$$ViewBinder<T extends com.fgr.miaoxin.fragment.Frien
     View view;
     view = finder.findRequiredView(source, 2131165275, "field 'mlvLetters'");
     target.mlvLetters = finder.castView(view, 2131165275, "field 'mlvLetters'");
-    view = finder.findRequiredView(source, 2131165274, "field 'listView'");
-    target.listView = finder.castView(view, 2131165274, "field 'listView'");
     view = finder.findRequiredView(source, 2131165276, "field 'tvLetter'");
     target.tvLetter = finder.castView(view, 2131165276, "field 'tvLetter'");
+    view = finder.findRequiredView(source, 2131165274, "field 'listView'");
+    target.listView = finder.castView(view, 2131165274, "field 'listView'");
   }
 
   @Override public void unbind(T target) {
     target.mlvLetters = null;
-    target.listView = null;
     target.tvLetter = null;
+    target.listView = null;
   }
 }

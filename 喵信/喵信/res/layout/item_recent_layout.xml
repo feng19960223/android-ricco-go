@@ -24,7 +24,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/tv_item_recent_username"
+                android:id="@+id/tv_item_recent_name"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -65,7 +65,7 @@
                 android:textSize="14sp" />
 
             <com.fgr.miaoxin.view.BadgeView
-                android:id="@+id/bv_item_recent_count"
+                android:id="@+id/bv_item_recent_unread"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical" />
