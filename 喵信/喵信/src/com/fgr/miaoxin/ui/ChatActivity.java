@@ -11,11 +11,13 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -23,16 +25,20 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.OnClick;
+import butterknife.OnTouch;
+import cn.bmob.im.BmobRecordManager;
 import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.bean.BmobInvitation;
 import cn.bmob.im.bean.BmobMsg;
 import cn.bmob.im.inteface.EventListener;
+import cn.bmob.im.inteface.OnRecordChangeListener;
 import cn.bmob.im.inteface.UploadListener;
 import cn.bmob.v3.listener.PushListener;
 
@@ -83,6 +89,29 @@ public class ChatActivity extends BaseActivity implements EventListener {
 	LinearLayout addLayout;
 	String cameraPath;
 
+	// 与语音聊天消息相关的内容
+	@Bind(R.id.ll_chat_textinputcontainer)
+	LinearLayout textinputContainer;
+
+	@Bind(R.id.ll_chat_voiceinputcontainer)
+	LinearLayout voiceinputContainer;
+
+	@Bind(R.id.ll_chat_voicecontainer)
+	LinearLayout voiceContainer;
+
+	@Bind(R.id.iv_chat_voicevolum)
+	ImageView ivVoiceVolum;
+	@Bind(R.id.tv_chat_voicetip)
+	TextView tvVoiceTip;
+
+	@Bind(R.id.btn_chat_speak)
+	Button btnSpeak;
+
+	int[] volumImages;// 录音时表示音量大小的图片
+
+	// BmobIMSDK作者封装的录音工具类
+	BmobRecordManager recordManager;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -124,7 +153,111 @@ public class ChatActivity extends BaseActivity implements EventListener {
 		initContentInput();
 		initEmoLayout();
 		initAddLayout();
+		initVoiceLayout();
 
+	}
+
+	private void initVoiceLayout() {
+		volumImages = new int[] { R.drawable.chat_icon_voice1,
+				R.drawable.chat_icon_voice2, R.drawable.chat_icon_voice3,
+				R.drawable.chat_icon_voice4, R.drawable.chat_icon_voice5,
+				R.drawable.chat_icon_voice6 };
+
+		recordManager = BmobRecordManager.getInstance(this);
+
+		recordManager.setOnRecordChangeListener(new OnRecordChangeListener() {
+
+			@Override
+			public void onVolumnChanged(int value) {
+				// 监听到录音过程中音量发生变化
+				// 根据传入的表示音量大小的value，来选择图片进行显示
+				ivVoiceVolum.setImageResource(volumImages[value]);
+
+			}
+
+			@Override
+			public void onTimeChanged(int value, String localPath) {
+				// 监听到录音过程中时间发生变化（单位：秒）
+				// value代表此时一共录制的时长
+				// localPath此时录制的语音文件在SD上的存储路径
+				if (value >= 60) {
+					// 停止录音
+					// 将已经录制好的60秒的语音发送出去
+					btnSpeak.setEnabled(false);
+					btnSpeak.setClickable(false);
+					btnSpeak.setPressed(false);
+					voiceContainer.setVisibility(View.INVISIBLE);
+					recordManager.stopRecording();
+					sendVoiceMessage(value, localPath);
+					new Handler().postDelayed(new Runnable() {
+
+						@Override
+						public void run() {
+							btnSpeak.setEnabled(true);
+							btnSpeak.setClickable(true);
+
+						}
+					}, 1000);
+
+				}
+
+			}
+		});
+
+	}
+
+	/**
+	 * 发送一条语音类型的聊天消息
+	 * 
+	 * @param value
+	 *            语音消息的时长
+	 * @param localPath
+	 *            语音消息在SD卡上的存储位置
+	 */
+	protected void sendVoiceMessage(int value, String localPath) {
+		if (!NetUtil.isNetworkAvailable(this)) {
+			toast("当前网络不给力");
+			return;
+		}
+
+		bmobChatManager.sendVoiceMessage(targetUser, localPath, value,
+				new UploadListener() {
+					// 语音文件已经发送完毕
+					// 在调用onStart方法时创建的BmobMsg对象已经被保存到了本地数据库的chat表中
+					// 通过调用refresh方法刷新ListView
+					// 此时chat表中BmobMsg对象所对应的数据记录的部分字段值与BmobMsg对象创建之初的属性发生了变化
+					// content 语音文件的路径&长度&语音文件在服务器上的地址
+					// status 1
+					// isreaded 1
+					@Override
+					public void onSuccess() {
+						refresh();
+
+					}
+
+					// 在语音聊天消息发送之前
+					// 会根据传入的语音文件的路径和长度
+					// 构建一个BmobMsg对象
+					// 此时该BmobMsg对象的属性为：
+					// tag ""
+					// content 语音文件的路径&长度
+					// msgType 4
+					// status 0
+					// isreaded 0
+					// 调用监听器的onStart方法，将该BmobMsg对象传入
+					@Override
+					public void onStart(BmobMsg msg) {
+						adapter.addItem(msg);
+						listView.setSelection(adapter.getCount() - 1);
+
+					}
+
+					@Override
+					public void onFailure(int error, String arg1) {
+						toastAndLog("语音类型聊天消息发送失败", error, arg1);
+
+					}
+				});
 	}
 
 	/**
@@ -173,7 +306,11 @@ public class ChatActivity extends BaseActivity implements EventListener {
 
 			@Override
 			public void onClick(View v) {
-				// TODO 跳转到地图界面进行定位
+				// 跳转到地图界面进行定位
+				Intent intent = new Intent(ChatActivity.this,
+						LocationActivity.class);
+				intent.putExtra("from", "mylocation");
+				startActivityForResult(intent, 103);
 
 			}
 		});
@@ -367,6 +504,10 @@ public class ChatActivity extends BaseActivity implements EventListener {
 
 		} else {
 			moreContainer.addView(addLayout);
+			if (voiceinputContainer.getVisibility() == View.VISIBLE) {
+				textinputContainer.setVisibility(View.VISIBLE);
+				voiceinputContainer.setVisibility(View.INVISIBLE);
+			}
 		}
 	}
 
@@ -389,10 +530,65 @@ public class ChatActivity extends BaseActivity implements EventListener {
 				sendImageMessage(cameraPath);
 				break;
 			case 103:
-				// TODO 定位返回结果
+				// 定位返回结果
+				String address = arg2.getStringExtra("address");
+				String localFilePath = arg2.getStringExtra("localFilePath");
+				String url = arg2.getStringExtra("url");
+
+				// log("获得的地址是："+address+",截图的本地路径："+localFilePath+",截图的服务器地址："+url);
+
+				sendLocationMessage(MyApp.lastPoint.getLatitude(),
+						MyApp.lastPoint.getLongitude(), address, url,
+						localFilePath);
+
 				break;
 			}
 		}
+	}
+
+	/**
+	 * 发送位置类型的聊天消息
+	 * 
+	 * @param lat
+	 *            纬度
+	 * @param lng
+	 *            经度
+	 * @param address
+	 *            地址
+	 * @param url
+	 *            截图的网络地址
+	 * @param localFilePath
+	 *            截图的本地地址
+	 */
+	private void sendLocationMessage(double lat, double lng, String address,
+			String url, String localFilePath) {
+
+		if (!NetUtil.isNetworkAvailable(this)) {
+			toast("当前网络不给力");
+			return;
+		}
+		// 创建“位置类型聊天消息”指定了msg对象msgType为3，
+		// 然后将地址，纬度，经度拼接为地址&纬度&经度大字符串后
+		// 剩下的步骤均与发送文本类型的聊天消息一致
+		// 经过修改后得到的msg的content就是：地址&本地截图地址&截图网络地址&纬度&经度
+		final BmobMsg msg = BmobMsg.createLocationSendMsg(this, targetId,
+				address + "&" + localFilePath + "&" + url, lat, lng);
+		bmobChatManager.sendTextMessage(targetUser, msg, new PushListener() {
+
+			@Override
+			public void onSuccess() {
+				adapter.addItem(msg);
+				listView.setSelection(adapter.getCount() - 1);
+
+			}
+
+			@Override
+			public void onFailure(int arg0, String arg1) {
+				toastAndLog("发送位置聊天消息失败，稍后重试", arg0, arg1);
+
+			}
+		});
+
 	}
 
 	/**
@@ -464,6 +660,68 @@ public class ChatActivity extends BaseActivity implements EventListener {
 
 	}
 
+	@OnClick(R.id.btn_chat_voice)
+	public void showVoiceInputContainer(View view) {
+		textinputContainer.setVisibility(View.INVISIBLE);
+		voiceinputContainer.setVisibility(View.VISIBLE);
+		moreContainer.removeAllViews();
+		btnAdd.setVisibility(View.VISIBLE);
+		btnSend.setVisibility(View.INVISIBLE);
+	}
+
+	@OnClick(R.id.btn_chat_keyboard)
+	public void showTextInputContainer(View view) {
+		textinputContainer.setVisibility(View.VISIBLE);
+		voiceinputContainer.setVisibility(View.INVISIBLE);
+	}
+
+	@OnTouch(R.id.btn_chat_speak)
+	public boolean speak(View view, MotionEvent event) {
+
+		int action = event.getAction();
+
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+			// 录音开始
+			voiceContainer.setVisibility(View.VISIBLE);
+			recordManager.startRecording(targetId);
+			break;
+
+		case MotionEvent.ACTION_MOVE:
+			btnSpeak.setPressed(true);
+			float y = event.getY();
+			if (y < 0) {
+				// 手指在按钮之外
+				tvVoiceTip.setText("松开手指，取消发送");
+			} else {
+				// 手指在按钮之内
+				tvVoiceTip.setText("手指上滑，取消发送");
+			}
+
+			break;
+
+		default:
+			// 录音结束了
+			btnSpeak.setPressed(false);
+			voiceContainer.setVisibility(View.INVISIBLE);
+			if (event.getY() < 0) {
+				// 在按钮之外抬起的手指
+				// 应该取消录制的内容
+				recordManager.cancelRecording();
+			} else {
+				// 将录制的内容作为语音类型的聊天消息发送出去
+				int value = recordManager.stopRecording();
+				String localPath = recordManager.getRecordFilePath(targetId);
+				sendVoiceMessage(value, localPath);
+			}
+
+			break;
+		}
+
+		return true;
+
+	}
+
 	@Override
 	public void onMessage(BmobMsg message) {
 		// 作为订阅者，将MyReceiver收到并保存的聊天消息
@@ -480,14 +738,20 @@ public class ChatActivity extends BaseActivity implements EventListener {
 
 	@Override
 	public void onReaded(String conversionId, String msgTime) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void onNetChange(boolean isNetConnected) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void onAddUser(BmobInvitation message) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -501,6 +765,7 @@ public class ChatActivity extends BaseActivity implements EventListener {
 						MyApp.logout();
 					}
 				});
+
 	}
 
 }

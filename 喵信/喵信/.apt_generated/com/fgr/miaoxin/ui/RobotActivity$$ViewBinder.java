@@ -8,10 +8,10 @@ import butterknife.ButterKnife.ViewBinder;
 public class RobotActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RobotActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165246, "field 'etContent'");
-    target.etContent = finder.castView(view, 2131165246, "field 'etContent'");
     view = finder.findRequiredView(source, 2131165245, "field 'listview'");
     target.listview = finder.castView(view, 2131165245, "field 'listview'");
+    view = finder.findRequiredView(source, 2131165246, "field 'etContent'");
+    target.etContent = finder.castView(view, 2131165246, "field 'etContent'");
     view = finder.findRequiredView(source, 2131165247, "method 'send'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
@@ -24,7 +24,7 @@ public class RobotActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RobotActivit
   }
 
   @Override public void unbind(T target) {
-    target.etContent = null;
     target.listview = null;
+    target.etContent = null;
   }
 }

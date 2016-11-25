@@ -8,8 +8,8 @@ import butterknife.ButterKnife.ViewBinder;
 public class RegistActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RegistActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165240, "field 'etRePassword'");
-    target.etRePassword = finder.castView(view, 2131165240, "field 'etRePassword'");
+    view = finder.findRequiredView(source, 2131165241, "field 'rgGender'");
+    target.rgGender = finder.castView(view, 2131165241, "field 'rgGender'");
     view = finder.findRequiredView(source, 2131165244, "field 'btnRegist' and method 'regist'");
     target.btnRegist = finder.castView(view, 2131165244, "field 'btnRegist'");
     view.setOnClickListener(
@@ -20,6 +20,10 @@ public class RegistActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RegistActiv
           target.regist(p0);
         }
       });
+    view = finder.findRequiredView(source, 2131165239, "field 'etPassword'");
+    target.etPassword = finder.castView(view, 2131165239, "field 'etPassword'");
+    view = finder.findRequiredView(source, 2131165240, "field 'etRePassword'");
+    target.etRePassword = finder.castView(view, 2131165240, "field 'etRePassword'");
     view = finder.findRequiredView(source, 2131165238, "field 'etUsername' and method 'recover'");
     target.etUsername = finder.castView(view, 2131165238, "field 'etUsername'");
     ((android.widget.TextView) view).addTextChangedListener(
@@ -46,17 +50,13 @@ public class RegistActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RegistActiv
           
         }
       });
-    view = finder.findRequiredView(source, 2131165241, "field 'rgGender'");
-    target.rgGender = finder.castView(view, 2131165241, "field 'rgGender'");
-    view = finder.findRequiredView(source, 2131165239, "field 'etPassword'");
-    target.etPassword = finder.castView(view, 2131165239, "field 'etPassword'");
   }
 
   @Override public void unbind(T target) {
-    target.etRePassword = null;
-    target.btnRegist = null;
-    target.etUsername = null;
     target.rgGender = null;
+    target.btnRegist = null;
     target.etPassword = null;
+    target.etRePassword = null;
+    target.etUsername = null;
   }
 }

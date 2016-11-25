@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import butterknife.Bind;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.listener.UploadFileListener;
@@ -45,43 +46,34 @@ import com.fgr.miaoxin.constant.Constant.Position;
 
 public class LocationActivity extends BaseActivity {
 
-	String from;// "mylocation"代表定位 showlocation代表显示位置
-	MapView mMapView = null;
+	String from;// "mylocation"代表需要定位 "showaddress"代表需要显示一个指定地址
+	@Bind(R.id.bmapView)
+	MapView mapView;
+	BaiduMap baiduMap;
 
-	BaiduMap baiduMap;// 地图对象
+	LocationClient client;
+	BDLocationListener listener;
 
-	ProgressDialog pd;// 截图操作中给用户提示
-
-	// 定位客户端
-	public LocationClient mLocationClient = null;
-	// 定位监听器
-	public BDLocationListener myListener = new MyLocationListener();
+	ProgressDialog pd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 	}
 
 	@Override
 	public void setMyContentView() {
 		setContentView(R.layout.activity_location);
-
 	}
 
 	@Override
 	public void init() {
 		super.init();
 		from = getIntent().getStringExtra("from");
-		// 获取地图控件引用
-		mMapView = (MapView) findViewById(R.id.bmapView);
-		// 获取地图对象
-		baiduMap = mMapView.getMap();
-		// 调整一下比例尺(16 比例尺200米 ~ 20 比例尺为10米)
-		baiduMap.setMaxAndMinZoomLevel(20, 16);
-
+		baiduMap = mapView.getMap();
+		initBaiduMap();
 		if ("mylocation".equals(from)) {
-			// 显示当前用户的位置
+			// 定位
 			setHeaderTitle("我的位置");
 			setHeaderImage(Position.START, R.drawable.back_arrow_2, true,
 					new OnClickListener() {
@@ -89,6 +81,7 @@ public class LocationActivity extends BaseActivity {
 						@Override
 						public void onClick(View v) {
 							finish();
+
 						}
 					});
 
@@ -105,7 +98,6 @@ public class LocationActivity extends BaseActivity {
 								@Override
 								public void onSnapshotReady(Bitmap bitmap) {
 									try {
-										// 截图上传到Bmob文件服务器
 										File file = new File(
 												Environment
 														.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
@@ -115,8 +107,9 @@ public class LocationActivity extends BaseActivity {
 												file);
 										bitmap.compress(CompressFormat.JPEG,
 												30, stream);
-										final String path = file
+										final String localfilePath = file
 												.getAbsolutePath();
+										// 将地图截图上传到服务器
 										final BmobFile bf = new BmobFile(file);
 										bf.uploadblock(LocationActivity.this,
 												new UploadFileListener() {
@@ -125,7 +118,7 @@ public class LocationActivity extends BaseActivity {
 													public void onSuccess() {
 														final String url = bf
 																.getFileUrl(LocationActivity.this);
-														// 根据经纬度查找街道名称（反向地理位置查询）
+														// 根据定位得到的经纬度，进行街道名称的查询
 														GeoCoder geoCoder = GeoCoder
 																.newInstance();
 														geoCoder.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
@@ -134,34 +127,29 @@ public class LocationActivity extends BaseActivity {
 															public void onGetReverseGeoCodeResult(
 																	ReverseGeoCodeResult arg0) {
 																pd.dismiss();
-																String address = "";
+																// 根据给定的经纬度找到了对应的街道名称
+																String address;
 																if (arg0 == null
 																		|| arg0.error != SearchResult.ERRORNO.NO_ERROR) {
-																	address = "未知地址";
+
+																	address = "位置道路";
+
 																} else {
 																	address = arg0
 																			.getAddress();
+
 																}
 
-																// 将所有结果回传到ChatActivity
 																Intent data = new Intent();
-																data.putExtra(
-																		"lat",
-																		MyApp.lastPoint
-																				.getLatitude());
-																data.putExtra(
-																		"lng",
-																		MyApp.lastPoint
-																				.getLongitude());
 																data.putExtra(
 																		"address",
 																		address);
 																data.putExtra(
+																		"localFilePath",
+																		localfilePath);
+																data.putExtra(
 																		"url",
 																		url);
-																data.putExtra(
-																		"path",
-																		path);
 																setResult(
 																		RESULT_OK,
 																		data);
@@ -172,9 +160,12 @@ public class LocationActivity extends BaseActivity {
 															@Override
 															public void onGetGeoCodeResult(
 																	GeoCodeResult arg0) {
+																// TODO
+																// Auto-generated
+																// method stub
+
 															}
 														});
-
 														ReverseGeoCodeOption option = new ReverseGeoCodeOption();
 														option.location(new LatLng(
 																MyApp.lastPoint
@@ -189,24 +180,28 @@ public class LocationActivity extends BaseActivity {
 													public void onFailure(
 															int arg0,
 															String arg1) {
-														// TODO Auto-generated
-														// method stub
+														pd.dismiss();
+														toastAndLog(
+																"截图失败，稍后重试",
+																arg0, arg1);
 
 													}
 												});
 
 									} catch (Exception e) {
+										if (pd != null)
+											pd.dismiss();
 										e.printStackTrace();
 									}
-
 								}
 							});
 						}
 					});
 
 			getMyLocation();
-		} else {
 
+		} else {
+			// 显示一个位置
 			String address = getIntent().getStringExtra("address");
 			setHeaderTitle(address);
 			setHeaderImage(Position.START, R.drawable.back_arrow_2, true,
@@ -215,21 +210,40 @@ public class LocationActivity extends BaseActivity {
 						@Override
 						public void onClick(View v) {
 							finish();
+
 						}
 					});
 
-			showLocation();
+			showAddress();
 		}
 	}
 
+	private void showAddress() {
+		double lat = getIntent().getDoubleExtra("lat", 0.0);
+		double lng = getIntent().getDoubleExtra("lng", 0.0);
+
+		LatLng location = new LatLng(lat, lng);
+
+		MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(location);
+
+		baiduMap.animateMapStatus(msu);
+
+		MarkerOptions option = new MarkerOptions();
+		option.position(location);
+		option.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker));
+		baiduMap.addOverlay(option);
+
+	}
+
 	private void getMyLocation() {
-		mLocationClient = new LocationClient(getApplicationContext()); // 声明LocationClient类
-		mLocationClient.registerLocationListener(myListener); // 注册监听函数
+		client = new LocationClient(this);
+		listener = new MyLocationListener();
+		client.registerLocationListener(listener);
 
 		LocationClientOption option = new LocationClientOption();
 		option.setLocationMode(LocationMode.Hight_Accuracy);// 可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
 		option.setCoorType("bd09ll");// 可选，默认gcj02，设置返回的定位结果坐标系
-		int span = 1000 * 60 * 5;// 根据业务需求（定位间隔设置为5分钟）
+		int span = 1000 * 60 * 5;
 		option.setScanSpan(span);// 可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
 		option.setIsNeedAddress(true);// 可选，设置是否需要地址信息，默认不需要
 		option.setOpenGps(true);// 可选，默认false,设置是否使用gps
@@ -239,108 +253,95 @@ public class LocationActivity extends BaseActivity {
 		option.setIgnoreKillProcess(false);// 可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
 		option.SetIgnoreCacheException(false);// 可选，默认false，设置是否收集CRASH信息，默认收集
 		option.setEnableSimulateGps(false);// 可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
-		mLocationClient.setLocOption(option);
-		mLocationClient.start();
+		client.setLocOption(option);
+		client.start();
 
 	}
 
-	private void showLocation() {
-		// 点击了ChatActivity中位置聊天信息后
-		// 在地图中显示相应的位置点
-		double lat = getIntent().getDoubleExtra("lat", -1);
-		double lng = getIntent().getDoubleExtra("lng", -1);
+	private void initBaiduMap() {
+		baiduMap.setMaxAndMinZoomLevel(20, 15);
 
-		MarkerOptions option = new MarkerOptions();
-		option.position(new LatLng(lat, lng));
-		option.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker));
-		baiduMap.addOverlay(option);
-
-		MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(new LatLng(lat,
-				lng));
-		baiduMap.animateMapStatus(msu);
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		// 在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-		mMapView.onDestroy();
-		if (mLocationClient != null) {
-			mLocationClient.stop();
-			mLocationClient = null;
+		mapView.onDestroy();
+		if (client != null) {
+			client.stop();
+			client = null;
 		}
-
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		// 在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
-		mMapView.onResume();
+		mapView.onResume();
+
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 		// 在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
-		mMapView.onPause();
+		mapView.onPause();
 	}
 
-	private class MyLocationListener implements BDLocationListener {
+	public class MyLocationListener implements BDLocationListener {
 
 		@Override
 		public void onReceiveLocation(BDLocation location) {
-
 			int code = location.getLocType();
+
 			double lat = -1;
 			double lng = -1;
 
 			if (code == 61 || code == 66 || code == 161) {
-				// 定位成功了
+
 				lat = location.getLatitude();
 				lng = location.getLongitude();
+
 			} else {
-				// 定位失败了
-				// 则手动指定一个值(我的策略)
+
 				lat = MyApp.lastPoint.getLatitude();
 				lng = MyApp.lastPoint.getLongitude();
 			}
+
 			LatLng mylocation = new LatLng(lat, lng);
+
+			// 移动屏幕中心点
+			MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(mylocation);
+			baiduMap.animateMapStatus(msu);
+			// 放一个标志
 			MarkerOptions option = new MarkerOptions();
 			option.position(mylocation);
 			option.icon(BitmapDescriptorFactory
 					.fromResource(R.drawable.ic_marker));
 			baiduMap.addOverlay(option);
 
-			MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(mylocation);
-			baiduMap.animateMapStatus(msu);
+			// 放一个信息窗
 
-			TextView view = new TextView(LocationActivity.this);
-
-			view.setText("我在这");
-			view.setTextColor(Color.WHITE);
-			view.setBackgroundColor(Color.RED);
-			view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-			view.setPadding(5, 5, 5, 5);
-			InfoWindow infowindow = new InfoWindow(view, mylocation, -50);
+			TextView textview = new TextView(LocationActivity.this);
+			textview.setText("我在这");
+			textview.setBackgroundColor(Color.RED);
+			textview.setTextColor(Color.WHITE);
+			int padding = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 3, getResources()
+							.getDisplayMetrics());
+			textview.setPadding(padding, padding, padding, padding);
+			InfoWindow infowindow = new InfoWindow(textview, mylocation, -50);
 			baiduMap.showInfoWindow(infowindow);
 
-			// 是否还需要重复定位？
-			// 我的逻辑，显示成功后，就停止定位
-			if (mLocationClient.isStarted()) {
-				mLocationClient.unRegisterLocationListener(myListener);
-				mLocationClient.stop();
+			if (client.isStarted()) {
+				client.stop();
+				client.registerLocationListener(listener);
 			}
 
-			// 此时myLocation是最新一次的定位结果
-			// 应该与MyApp.lastPoint进行比较，
-			// 如果不一致，应该对MyApp.lastPoint进行更新
 			if (mylocation.latitude != MyApp.lastPoint.getLatitude()
 					|| mylocation.longitude != MyApp.lastPoint.getLongitude()) {
-				// 更新MyApp.lastPoint
-				MyApp.lastPoint = new BmobGeoPoint(mylocation.longitude,
-						mylocation.latitude);
-				// 更新当前登录用户在_user表中的位置
+				MyApp.lastPoint = new BmobGeoPoint(lng, lat);
 				updateUserLocation(null);
 			}
 
