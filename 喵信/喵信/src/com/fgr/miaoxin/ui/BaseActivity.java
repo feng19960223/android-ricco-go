@@ -8,7 +8,11 @@ import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -264,7 +268,14 @@ public abstract class BaseActivity extends FragmentActivity {
 			if (TextUtils.isEmpty(text)) {
 				// TODO
 				// 出现不了内容,背景和前景颜色一样
-				et.setError("请输入完整！");
+				SpannableString ss = new SpannableString("请输入完整！");
+				ss.setSpan(new ForegroundColorSpan(Color.RED), 0, 3,
+						SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ss.setSpan(new BackgroundColorSpan(Color.BLACK), 3, 6,
+						SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ss.setSpan(new ImageSpan(this, R.drawable.ue058), 5, 6,
+						SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+				et.setError(ss);
 				return true;
 			}
 		}

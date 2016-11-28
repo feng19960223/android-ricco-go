@@ -8,17 +8,17 @@ import butterknife.ButterKnife.ViewBinder;
 public class FriendAdapter$ViewHolder$$ViewBinder<T extends com.fgr.miaoxin.adapter.FriendAdapter.ViewHolder> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165319, "field 'ivAvatar'");
-    target.ivAvatar = finder.castView(view, 2131165319, "field 'ivAvatar'");
-    view = finder.findRequiredView(source, 2131165318, "field 'tvLetter'");
-    target.tvLetter = finder.castView(view, 2131165318, "field 'tvLetter'");
-    view = finder.findRequiredView(source, 2131165320, "field 'tvUsername'");
-    target.tvUsername = finder.castView(view, 2131165320, "field 'tvUsername'");
+    view = finder.findRequiredView(source, 2131165332, "field 'ivAvatar'");
+    target.ivAvatar = finder.castView(view, 2131165332, "field 'ivAvatar'");
+    view = finder.findRequiredView(source, 2131165333, "field 'tvUsername'");
+    target.tvUsername = finder.castView(view, 2131165333, "field 'tvUsername'");
+    view = finder.findRequiredView(source, 2131165331, "field 'tvLetter'");
+    target.tvLetter = finder.castView(view, 2131165331, "field 'tvLetter'");
   }
 
   @Override public void unbind(T target) {
     target.ivAvatar = null;
-    target.tvLetter = null;
     target.tvUsername = null;
+    target.tvLetter = null;
   }
 }

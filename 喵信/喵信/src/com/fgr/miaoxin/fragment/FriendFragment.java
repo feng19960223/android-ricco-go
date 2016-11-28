@@ -100,7 +100,6 @@ public class FriendFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO
 				// 点击跳转到NewFriendActivity显示收到的“添加好友申请”
 				jumpTo(NewFriendActivity.class, false);
 			}
@@ -222,7 +221,6 @@ public class FriendFragment extends BaseFragment {
 
 	public void refresh() {
 		// 创建假的好友数据
-		// TODO
 		// List<MyUser> list = createFakeFriends();
 
 		List<BmobChatUser> contacts = bmobDB.getAllContactList();
@@ -289,9 +287,9 @@ public class FriendFragment extends BaseFragment {
 		return list;
 	}
 
+	@SuppressWarnings("unused")
 	private List<MyUser> createFakeFriends() {
 		// 创建假的好友数据
-		// TODO
 		List<MyUser> list = new ArrayList<MyUser>();
 
 		MyUser mu = null;

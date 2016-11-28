@@ -6,6 +6,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 import butterknife.Bind;
@@ -13,7 +14,6 @@ import butterknife.ButterKnife;
 
 import com.fgr.miaoxin.R;
 import com.fgr.miaoxin.bean.MyUser;
-import com.fgr.miaoxin.view.XCRoundImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class FriendAdapter extends MyBaseAdapter<MyUser> implements
@@ -60,7 +60,7 @@ public class FriendAdapter extends MyBaseAdapter<MyUser> implements
 
 	public class ViewHolder {
 		@Bind(R.id.iv_item_friend_avatar)
-		XCRoundImageView ivAvatar;
+		ImageView ivAvatar;
 		@Bind(R.id.tv_item_friend_letter)
 		TextView tvLetter;
 		@Bind(R.id.tv_item_friend_username)

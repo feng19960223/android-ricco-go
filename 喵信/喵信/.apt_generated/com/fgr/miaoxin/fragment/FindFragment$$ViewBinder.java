@@ -5,14 +5,14 @@ import android.view.View;
 import butterknife.ButterKnife.Finder;
 import butterknife.ButterKnife.ViewBinder;
 
-public class MessageFragment$$ViewBinder<T extends com.fgr.miaoxin.fragment.MessageFragment> implements ViewBinder<T> {
+public class FindFragment$$ViewBinder<T extends com.fgr.miaoxin.fragment.FindFragment> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165290, "field 'listView'");
-    target.listView = finder.castView(view, 2131165290, "field 'listView'");
+    view = finder.findRequiredView(source, 2131165286, "field 'ptrListView'");
+    target.ptrListView = finder.castView(view, 2131165286, "field 'ptrListView'");
   }
 
   @Override public void unbind(T target) {
-    target.listView = null;
+    target.ptrListView = null;
   }
 }

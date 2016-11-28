@@ -336,6 +336,7 @@ public class ChatAdapter extends MyBaseAdapter<BmobMsg> {
 			mp.setDataSource(voiceUrl);
 			mp.prepareAsync();
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

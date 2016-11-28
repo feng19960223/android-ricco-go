@@ -158,6 +158,10 @@
             android:name="com.fgr.miaoxin.ui.LocationActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.fgr.miaoxin.ui.PostBlogActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
