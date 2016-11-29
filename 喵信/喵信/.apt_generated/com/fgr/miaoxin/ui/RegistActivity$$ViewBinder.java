@@ -18,12 +18,12 @@ public class RegistActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RegistActiv
           target.regist(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131165255, "field 'etPassword'");
-    target.etPassword = finder.castView(view, 2131165255, "field 'etPassword'");
     view = finder.findRequiredView(source, 2131165257, "field 'rgGender'");
     target.rgGender = finder.castView(view, 2131165257, "field 'rgGender'");
     view = finder.findRequiredView(source, 2131165256, "field 'etRePassword'");
     target.etRePassword = finder.castView(view, 2131165256, "field 'etRePassword'");
+    view = finder.findRequiredView(source, 2131165255, "field 'etPassword'");
+    target.etPassword = finder.castView(view, 2131165255, "field 'etPassword'");
     view = finder.findRequiredView(source, 2131165254, "field 'etUsername' and method 'recover'");
     target.etUsername = finder.castView(view, 2131165254, "field 'etUsername'");
     ((android.widget.TextView) view).addTextChangedListener(
@@ -54,9 +54,9 @@ public class RegistActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.RegistActiv
 
   @Override public void unbind(T target) {
     target.btnRegist = null;
-    target.etPassword = null;
     target.rgGender = null;
     target.etRePassword = null;
+    target.etPassword = null;
     target.etUsername = null;
   }
 }

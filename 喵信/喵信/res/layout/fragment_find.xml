@@ -8,10 +8,47 @@
         android:id="@+id/headerview"
         layout="@layout/headerview_layout" />
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/ptr_find_blogs"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/ptr_find_blogs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_find_commentcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8dp"
+            android:background="@color/lightgray"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:visibility="invisible" >
+
+            <EditText
+                android:id="@+id/et_find_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_find_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_red_selector"
+                android:padding="5dp"
+                android:text="评论"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

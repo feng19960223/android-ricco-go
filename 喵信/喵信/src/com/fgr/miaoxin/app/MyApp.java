@@ -15,6 +15,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.sharesdk.framework.ShareSDK;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.fgr.miaoxin.R;
@@ -50,6 +51,7 @@ public class MyApp extends Application {
 		// BmobPush.startWork(this);
 		// 在使用SDK各组件之前初始化context信息，传入ApplicationContext
 		// 注意该方法要再setContentView方法之前实现
+		ShareSDK.initSDK(this);
 		context = this;
 		mediaPlayer = MediaPlayer.create(this, R.raw.notify);// 如果音乐文件特别大,不可以使用
 		// 做ImageLoader的全局初始化

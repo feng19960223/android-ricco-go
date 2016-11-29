@@ -8,16 +8,10 @@ import butterknife.ButterKnife.ViewBinder;
 public class ChatActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.ChatActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165212, "field 'tvVoiceTip'");
-    target.tvVoiceTip = finder.castView(view, 2131165212, "field 'tvVoiceTip'");
-    view = finder.findRequiredView(source, 2131165211, "field 'ivVoiceVolum'");
-    target.ivVoiceVolum = finder.castView(view, 2131165211, "field 'ivVoiceVolum'");
-    view = finder.findRequiredView(source, 2131165222, "field 'moreContainer'");
-    target.moreContainer = finder.castView(view, 2131165222, "field 'moreContainer'");
-    view = finder.findRequiredView(source, 2131165217, "field 'voiceinputContainer'");
-    target.voiceinputContainer = finder.castView(view, 2131165217, "field 'voiceinputContainer'");
     view = finder.findRequiredView(source, 2131165215, "field 'etContent'");
     target.etContent = finder.castView(view, 2131165215, "field 'etContent'");
+    view = finder.findRequiredView(source, 2131165213, "field 'textinputContainer'");
+    target.textinputContainer = finder.castView(view, 2131165213, "field 'textinputContainer'");
     view = finder.findRequiredView(source, 2131165219, "field 'btnSpeak' and method 'speak'");
     target.btnSpeak = finder.castView(view, 2131165219, "field 'btnSpeak'");
     view.setOnTouchListener(
@@ -29,6 +23,26 @@ public class ChatActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.ChatActivity>
           return target.speak(p0, p1);
         }
       });
+    view = finder.findRequiredView(source, 2131165212, "field 'tvVoiceTip'");
+    target.tvVoiceTip = finder.castView(view, 2131165212, "field 'tvVoiceTip'");
+    view = finder.findRequiredView(source, 2131165220, "field 'btnAdd' and method 'addAddLayout'");
+    target.btnAdd = finder.castView(view, 2131165220, "field 'btnAdd'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.addAddLayout(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131165222, "field 'moreContainer'");
+    target.moreContainer = finder.castView(view, 2131165222, "field 'moreContainer'");
+    view = finder.findRequiredView(source, 2131165217, "field 'voiceinputContainer'");
+    target.voiceinputContainer = finder.castView(view, 2131165217, "field 'voiceinputContainer'");
+    view = finder.findRequiredView(source, 2131165211, "field 'ivVoiceVolum'");
+    target.ivVoiceVolum = finder.castView(view, 2131165211, "field 'ivVoiceVolum'");
+    view = finder.findRequiredView(source, 2131165209, "field 'listView'");
+    target.listView = finder.castView(view, 2131165209, "field 'listView'");
     view = finder.findRequiredView(source, 2131165210, "field 'voiceContainer'");
     target.voiceContainer = finder.castView(view, 2131165210, "field 'voiceContainer'");
     view = finder.findRequiredView(source, 2131165221, "field 'btnSend' and method 'sendTextMessage'");
@@ -41,20 +55,6 @@ public class ChatActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.ChatActivity>
           target.sendTextMessage(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131165213, "field 'textinputContainer'");
-    target.textinputContainer = finder.castView(view, 2131165213, "field 'textinputContainer'");
-    view = finder.findRequiredView(source, 2131165220, "field 'btnAdd' and method 'addAddLayout'");
-    target.btnAdd = finder.castView(view, 2131165220, "field 'btnAdd'");
-    view.setOnClickListener(
-      new butterknife.internal.DebouncingOnClickListener() {
-        @Override public void doClick(
-          android.view.View p0
-        ) {
-          target.addAddLayout(p0);
-        }
-      });
-    view = finder.findRequiredView(source, 2131165209, "field 'listView'");
-    target.listView = finder.castView(view, 2131165209, "field 'listView'");
     view = finder.findRequiredView(source, 2131165214, "method 'showVoiceInputContainer'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
@@ -62,15 +62,6 @@ public class ChatActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.ChatActivity>
           android.view.View p0
         ) {
           target.showVoiceInputContainer(p0);
-        }
-      });
-    view = finder.findRequiredView(source, 2131165218, "method 'showTextInputContainer'");
-    view.setOnClickListener(
-      new butterknife.internal.DebouncingOnClickListener() {
-        @Override public void doClick(
-          android.view.View p0
-        ) {
-          target.showTextInputContainer(p0);
         }
       });
     view = finder.findRequiredView(source, 2131165216, "method 'addEmoLayout'");
@@ -82,19 +73,28 @@ public class ChatActivity$$ViewBinder<T extends com.fgr.miaoxin.ui.ChatActivity>
           target.addEmoLayout(p0);
         }
       });
+    view = finder.findRequiredView(source, 2131165218, "method 'showTextInputContainer'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.showTextInputContainer(p0);
+        }
+      });
   }
 
   @Override public void unbind(T target) {
+    target.etContent = null;
+    target.textinputContainer = null;
+    target.btnSpeak = null;
     target.tvVoiceTip = null;
-    target.ivVoiceVolum = null;
+    target.btnAdd = null;
     target.moreContainer = null;
     target.voiceinputContainer = null;
-    target.etContent = null;
-    target.btnSpeak = null;
+    target.ivVoiceVolum = null;
+    target.listView = null;
     target.voiceContainer = null;
     target.btnSend = null;
-    target.textinputContainer = null;
-    target.btnAdd = null;
-    target.listView = null;
   }
 }

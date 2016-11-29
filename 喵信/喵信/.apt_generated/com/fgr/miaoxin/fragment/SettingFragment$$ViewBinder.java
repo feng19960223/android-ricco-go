@@ -8,22 +8,10 @@ import butterknife.ButterKnife.ViewBinder;
 public class SettingFragment$$ViewBinder<T extends com.fgr.miaoxin.fragment.SettingFragment> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131165294, "field 'ivNotification' and method 'setNotification'");
-    target.ivNotification = finder.castView(view, 2131165294, "field 'ivNotification'");
-    view.setOnClickListener(
-      new butterknife.internal.DebouncingOnClickListener() {
-        @Override public void doClick(
-          android.view.View p0
-        ) {
-          target.setNotification(p0);
-        }
-      });
-    view = finder.findRequiredView(source, 2131165291, "field 'tvUsername'");
-    target.tvUsername = finder.castView(view, 2131165291, "field 'tvUsername'");
-    view = finder.findRequiredView(source, 2131165297, "field 'tvVibrate'");
-    target.tvVibrate = finder.castView(view, 2131165297, "field 'tvVibrate'");
-    view = finder.findRequiredView(source, 2131165298, "field 'ivVibrate' and method 'setVibrate'");
-    target.ivVibrate = finder.castView(view, 2131165298, "field 'ivVibrate'");
+    view = finder.findRequiredView(source, 2131165294, "field 'tvUsername'");
+    target.tvUsername = finder.castView(view, 2131165294, "field 'tvUsername'");
+    view = finder.findRequiredView(source, 2131165301, "field 'ivVibrate' and method 'setVibrate'");
+    target.ivVibrate = finder.castView(view, 2131165301, "field 'ivVibrate'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -32,10 +20,12 @@ public class SettingFragment$$ViewBinder<T extends com.fgr.miaoxin.fragment.Sett
           target.setVibrate(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131165293, "field 'tvNotification'");
-    target.tvNotification = finder.castView(view, 2131165293, "field 'tvNotification'");
-    view = finder.findRequiredView(source, 2131165296, "field 'ivSound' and method 'setSound'");
-    target.ivSound = finder.castView(view, 2131165296, "field 'ivSound'");
+    view = finder.findRequiredView(source, 2131165296, "field 'tvNotification'");
+    target.tvNotification = finder.castView(view, 2131165296, "field 'tvNotification'");
+    view = finder.findRequiredView(source, 2131165298, "field 'tvSound'");
+    target.tvSound = finder.castView(view, 2131165298, "field 'tvSound'");
+    view = finder.findRequiredView(source, 2131165299, "field 'ivSound' and method 'setSound'");
+    target.ivSound = finder.castView(view, 2131165299, "field 'ivSound'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -44,18 +34,19 @@ public class SettingFragment$$ViewBinder<T extends com.fgr.miaoxin.fragment.Sett
           target.setSound(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131165295, "field 'tvSound'");
-    target.tvSound = finder.castView(view, 2131165295, "field 'tvSound'");
-    view = finder.findRequiredView(source, 2131165292, "method 'setUserInfo'");
+    view = finder.findRequiredView(source, 2131165300, "field 'tvVibrate'");
+    target.tvVibrate = finder.castView(view, 2131165300, "field 'tvVibrate'");
+    view = finder.findRequiredView(source, 2131165297, "field 'ivNotification' and method 'setNotification'");
+    target.ivNotification = finder.castView(view, 2131165297, "field 'ivNotification'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
           android.view.View p0
         ) {
-          target.setUserInfo(p0);
+          target.setNotification(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131165299, "method 'logout'");
+    view = finder.findRequiredView(source, 2131165302, "method 'logout'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -64,15 +55,24 @@ public class SettingFragment$$ViewBinder<T extends com.fgr.miaoxin.fragment.Sett
           target.logout(p0);
         }
       });
+    view = finder.findRequiredView(source, 2131165295, "method 'setUserInfo'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.setUserInfo(p0);
+        }
+      });
   }
 
   @Override public void unbind(T target) {
-    target.ivNotification = null;
     target.tvUsername = null;
-    target.tvVibrate = null;
     target.ivVibrate = null;
     target.tvNotification = null;
-    target.ivSound = null;
     target.tvSound = null;
+    target.ivSound = null;
+    target.tvVibrate = null;
+    target.ivNotification = null;
   }
 }
